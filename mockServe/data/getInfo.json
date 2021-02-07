@@ -1,0 +1,14 @@
+{
+  "username": "testUser",
+  "password": "1111111",
+  "phone": "123456",
+  "idcard": "123456",
+  "nickname": "测试",
+  "name": "测试",
+  "gameId": "test000",
+  "gameStatus": "0",
+  "gameType": "2",
+  "server": "1111",
+  "loginTime": "20210128",
+  "amount": 12345
+}
