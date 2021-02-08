@@ -5,6 +5,7 @@ Vue.use(Router)
 
 // 公共路由
 export const constantRoutes = [
+  /*-- pc routes [start] --*/
   {
     path: '/redirect',
     hidden: true,
@@ -17,7 +18,7 @@ export const constantRoutes = [
   },
   {
     path: '/login',
-    component: (resolve) => require(['@/views/login'], resolve),
+    component: (resolve) => require(['@/views/pc/login'], resolve),
     hidden: true
   },
   {
@@ -76,7 +77,29 @@ export const constantRoutes = [
         }
       }
     ]
-  }
+  },
+  /*-- pc routes [end] --*/
+
+
+  /*-- mobile routes [start] --*/
+  {
+    path: '/mobile/login',
+    component: (resolve) => require(['@/views/mobile/login'], resolve),
+    hidden: true
+  },
+  {
+    path: '/mobile/register',
+    component: (resolve) => require(['@/views/mobile/page/register'], resolve),
+    hidden: true
+  },
+
+
+  /*-- mobile routes [end] --*/
+
+
+
+
+
 ]
 
 export default new Router({
