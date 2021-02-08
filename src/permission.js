@@ -7,7 +7,7 @@ import { getToken } from '@/utils/auth'
 
 NProgress.configure({ showSpinner: false })
 
-const whiteList = ['/login', '/auth-redirect', '/index', '/register']
+const whiteList = ['/login', '/auth-redirect', '/index', '/register' ,'/mobile/login','/mobile/register']
 
 router.beforeEach((to, from, next) => {
   NProgress.start()
