@@ -1,4 +1,4 @@
-<script src="../../../api/login.js"></script>
+<script src="../../api/login.js"></script>
 <template>
   <div class="login">
     <el-form ref="registerForm" :model="registerForm" :rules="loginRules" class="login-form" label-width="80px">
@@ -224,7 +224,7 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100%;
-  background: #ffffff url(../../../assets/images/login-bg.jpg) no-repeat;
+  background: #ffffff url(../../assets/images/login-bg.jpg) no-repeat;
   background-size: 118% 100%;
 }
 
