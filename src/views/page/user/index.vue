@@ -7,34 +7,36 @@
     <div class="index-box">
       <el-tabs v-model="activeName" @tab-click="handleClick" tab-position="left">
         <el-tab-pane label="我的积分" name="myBonus">
+          <div class="header-divider">我的积分</div>
+          <el-divider></el-divider>
           <my-bonus @handleBtn="handleBtn"></my-bonus>
         </el-tab-pane>
         <el-tab-pane label="用户信息" name="info">
-          <h2>用户信息</h2>
+          <div class="header-divider">用户信息</div>
           <el-divider></el-divider>
           <!--          <info></info>-->
           <component v-bind:is="info"></component>
         </el-tab-pane>
         <el-tab-pane label="参赛记录" name="record">
-          <h2>参赛记录</h2>
+          <div class="header-divider">参赛记录</div>
           <el-divider></el-divider>
           <!--          <record></record>-->
           <component v-bind:is="record"></component>
         </el-tab-pane>
         <el-tab-pane label="积分明细" name="bonusDetail">
-          <h2>积分明细</h2>
+          <div class="header-divider">积分明细</div>
           <el-divider></el-divider>
           <!--          <bonus-detail></bonus-detail>-->
           <component v-bind:is="bonusDetail"></component>
         </el-tab-pane>
         <el-tab-pane label="充值明细" name="payDetail">
-          <h2>充值明细</h2>
+          <div class="header-divider">充值明细</div>
           <el-divider></el-divider>
           <!--          <pay-detail></pay-detail>-->
           <component v-bind:is="payDetail"></component>
         </el-tab-pane>
         <el-tab-pane label="充值" name="pay">
-          <h2>充值</h2>
+          <div class="header-divider">充值</div>
           <el-divider></el-divider>
           <!--          <pay @handleBtn="handleBtn"></pay>-->
           <component v-bind:is="pay" @handleBtn="handleBtn"></component>
@@ -164,13 +166,20 @@ export default {
   }
 }
 
+
+
 .index-box{
   padding: 0 18%;
   margin: 20px;
 
+  .header-divider{
+    color: #fff;
+    font-size: 16px;
+  }
+
   ::v-deep .el-tabs__item {
     color: #d8d8d8;
-    font-size: 15px;
+    font-size: 16px;
     padding: 0 40px;
     height: 60px;
     line-height: 60px;
@@ -185,5 +194,105 @@ export default {
   ::v-deep .el-tabs__item.is-left.is-active{
     background-color: #444444;
   }
+
+  ::v-deep .el-divider {
+    background-color: #666666;
+  }
+
+
+
+  ::v-deep .el-dialog__body {
+    padding: 10px 25px 25px 25px;
+  }
+  ::v-deep .el-table th {
+    background-color: #222222;
+  }
+
+  ::v-deep .el-table tr {
+    background-color: #1a1a1a;
+  }
+
+  ::v-deep .el-table--border {
+    border: 1px solid #333333;
+    border-top: none;
+    border-left: none;
+    border-right: none !important;
+  }
+
+  ::v-deep .el-table--border th {
+    border-right: none;
+    border-left: none;
+  }
+
+  ::v-deep .el-table--border td {
+    border-right: none;
+    border-left: none;
+  }
+
+  ::v-deep .el-table th.is-leaf {
+    border-bottom: 1px solid #333333;
+  }
+
+  ::v-deep .el-table--border th.gutter:last-of-type {
+    width: 0px !important;
+    display: inherit !important;
+  }
+
+  ::v-deep .el-table td {
+    border-bottom: 1px solid #333333;
+  }
+
+  ::v-deep .el-table {
+    color: #d1d1d1;
+    background-color: #1a1a1a;
+  }
+
+  ::v-deep .el-table thead {
+    color: #d1d1d1;
+    font-weight: 550;
+  }
+
+  ::v-deep .el-table--enable-row-hover .el-table__body tr:hover > td {
+    background-color: #222222;
+  }
+
+  ::v-deep .el-table--border::after {
+    display: none;
+  }
+
+  ::v-deep .el-table::before {
+    height: 0px;
+  }
+
+  ::v-deep .el-pagination__total {
+    color: #fff;
+  }
+  ::v-deep.el-pagination__jump{
+    color: #fff;
+  }
+
+  ::v-deep .el-loading-mask{
+    background-color: rgba(34,34,34, 0.9);
+  }
+
+  ::v-deep .el-loading-spinner .path {
+    stroke: #f88f08;
+  }
+
+  ::v-deep .el-pagination.is-background .el-pager li:not(.disabled).active {
+    background-color: #f88f08;
+    color: #000;
+  }
 }
+
+@media screen and (max-width: 1366px) {
+  .index-box{
+    padding: 0 12%;
+  }
+  .index-header {
+    padding: 0 12%;
+  }
+}
+
+
 </style>

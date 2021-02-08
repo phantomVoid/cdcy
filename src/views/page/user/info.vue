@@ -2,7 +2,7 @@
   <div class="box">
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="基本资料" name="first">
-        <el-form ref="infoForm1" :model="infoForm1" :rules="infoRules" label-width="150" label-position="left">
+        <el-form ref="infoForm1" :model="infoForm1" :rules="infoRules" label-width="150" label-position="left" class="infoForm1">
           <el-form-item prop="name" label="姓名">
             <el-input v-model="infoForm1.name" type="text" auto-complete="off" placeholder="姓名">
             </el-input>
@@ -16,7 +16,7 @@
             </el-input>
           </el-form-item>
           <el-form-item prop="code" label="验证码">
-            <el-input v-model="infoForm1.code" type="text" auto-complete="off" placeholder="验证码" style="width: 18%"
+            <el-input v-model="infoForm1.code" type="text" auto-complete="off" placeholder="验证码" style="width: calc(50% - 110px)"
             ></el-input>
             <el-button style=" margin-left: 10px;margin-top:5px;width: 100px" @click="getSmsCode1"
                        :disabled="codeDisable1"
@@ -42,7 +42,7 @@
             </el-input>
           </el-form-item>
           <el-form-item prop="code" label="验证码">
-            <el-input v-model="infoForm2.code" type="text" auto-complete="off" placeholder="验证码" style="width: 18%"
+            <el-input v-model="infoForm2.code" type="text" auto-complete="off" placeholder="验证码" style="width: calc(50% - 110px)"
             ></el-input>
             <el-button style=" margin-left: 10px;margin-top:5px;width: 100px" @click="getSmsCode2"
                        :disabled="codeDisable2"
@@ -60,7 +60,6 @@
 <script scoped>
 import { userEdit } from '@/api/user'
 import { getRegCode } from '@/api/register'
-import store from '@/store'
 
 export default {
   name: 'info',
@@ -258,7 +257,7 @@ export default {
 
 <style lang="scss" scoped>
 .el-input {
-  width: 30%;
+  width: 50%;
 }
 
 ::v-deep .el-tabs__nav-wrap::after {
@@ -266,19 +265,51 @@ export default {
 }
 
 .box {
-  margin-left: 10px
+  margin-left: 10px;
+
+  ::v-deep .el-tabs__item{
+    height: 35px;
+    line-height: 35px;
+    font-size: 15px;
+    padding: 0 20px;
+  }
+
+  ::v-deep .el-form-item__label{
+    color: #fff;
+    font-weight: 500;
+  }
 }
 
 ::v-deep .el-form-item__label {
   width: 100px;
 }
 
+::v-deep .infoForm1 .el-form-item__label {
+  width: 80px;
+}
 ::v-deep .el-form-item__error {
   margin-left: 100px;
   margin-top: 3px;
+  color: #ff9308;
 }
 
 .submit-btn {
-  margin-left: 16%;
+  margin-left: 100px;
+  width: 50%;
 }
+.infoForm1 .submit-btn {
+  margin-left: 80px;
+}
+::v-deep .el-tabs__item.is-top.is-active {
+  color: #ff9308 !important;
+}
+
+::v-deep .el-tabs__nav-wrap::after {
+  display: none !important;
+}
+
+::v-deep .el-tabs__active-bar.is-top {
+  background-color: #ff9308 !important;
+}
+
 </style>

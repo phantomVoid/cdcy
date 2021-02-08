@@ -1,13 +1,14 @@
 import router from './router'
 import store from './store'
-import {Message} from 'element-ui'
+import { Message } from 'element-ui'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-import {getToken} from '@/utils/auth'
+import { getToken } from '@/utils/auth'
 
-NProgress.configure({showSpinner: false})
+NProgress.configure({ showSpinner: false })
 
 const whiteList = ['/index', '/login', '/auth-redirect', '/register', '/mobile/login', '/mobile/register','/mobile/index']
+const whiteList = ['/login', '/auth-redirect', '/index', '/register', '/forget']
 
 router.beforeEach((to, from, next) => {
   console.log("\n\n\n this is permission.js beforeEach function: >>> ")
@@ -36,13 +37,13 @@ router.beforeEach((to, from, next) => {
       if (Object.keys(store.getters.info).length === 0) {
         store.dispatch('GetUserId').then(res => {
           const userId = res.id
-          store.dispatch('GetInfo', {userId}).then(accessRoutes => {
+          store.dispatch('GetInfo', { userId }).then(accessRoutes => {
             next()
           })
         }).catch(err => {
           store.dispatch('LogOut').then(() => {
             Message.error(err)
-            next({path: '/'})
+            next({ path: '/' })
           })
         })
       } else {

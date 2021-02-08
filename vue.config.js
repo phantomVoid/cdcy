@@ -28,6 +28,13 @@ module.exports = {
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''
         }
+      },
+      ['/chatroom/']: {
+        target: `http://127.0.0.1:8080/chatroom/`,
+        changeOrigin: true,
+        pathRewrite: {
+          ['^' + '/chatroom/']: ''
+        }
       }
     },
     disableHostCheck: true,

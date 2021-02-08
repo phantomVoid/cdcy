@@ -24,4 +24,7 @@ export default  {
   background-color: #979797;
   border-radius: 5px;
 }
+#nprogress .bar {
+  background: #ff9308 !important;
+}
 </style>

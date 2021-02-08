@@ -29,7 +29,7 @@
     >
       <el-table-column label="序号" align="center" type="index" width="50"/>
       <el-table-column label="流水号" align="center" prop="id" min-width="120"/>
-      <el-table-column label="时间" align="center" prop="logTime"/>
+      <el-table-column label="时间" align="center" prop="logTime" width="150"/>
       <el-table-column label="类型" align="center" prop="changeType" :formatter="integralTypeFormat"/>
       <el-table-column label="积分" align="center" prop="changeNum"/>
       <el-table-column label="备注" align="center" prop="remark"/>

@@ -29,7 +29,7 @@
     >
       <el-table-column label="序号" align="center" type="index" width="50"/>
       <el-table-column label="流水号" align="center" prop="id"/>
-      <el-table-column label="时间" align="center" prop="logTime"/>
+      <el-table-column label="时间" align="center" prop="logTime" width="150"/>
       <el-table-column label="支付类型" align="center" prop="orderType" :formatter="payTypeFormat"/>
       <el-table-column label="订单状态" align="center" prop="tranStatus" :formatter="tranStatusFormat"/>
       <el-table-column label="金额" align="center" prop="amount"/>

@@ -4,14 +4,13 @@
       <img src="@/assets/images/bonus.png" width="60px">
     </div>
     <div class="remain">
-      <span class="label">积分余额</span>
-      <span class="label remain-val">{{ userInfo.amount }}</span>
+      <span class="label">我的积分: {{ userInfo.amount }}</span>
     </div>
     <div class="button">
-      <el-button type="primary" @click="handleClick($event)" id="pay">积分充值</el-button>
+      <el-button type="primary" @click="handleClick($event)" id="pay" style="width: 40%">立即充值</el-button>
     </div>
-    <div class="button">
-      <el-button type="primary" @click="handleClick($event)" id="payDetail">积分明细</el-button>
+    <div class="link">
+      <el-link @click="handleClick($event)" id="bonusDetail">积分明细</el-link>
     </div>
   </div>
 </template>
@@ -52,21 +51,27 @@ export default {
 }
 
 .box {
-  width: 200px;
-  margin: 0 auto;
+  width: 100%;
+  margin: 20px auto;
   text-align: center;
-
+  padding-top: 30px;
   .button {
+    margin-top: 40px;
+  }
+  .link{
     margin-top: 20px;
+    ::v-deep .el-link--inner{
+      color: #f88f08;
+    }
+    ::v-deep .el-link.is-underline:hover:after {
+      border-bottom: 1px solid #f88f08;
+    }
   }
 
   .remain {
     margin-top: 10px;
-
-    .remain-val {
-      font-size: 18px;
-      margin-top: 6px;
-    }
+    font-size: 16px;
+    color: #fff;
   }
 }
 

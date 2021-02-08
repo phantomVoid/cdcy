@@ -340,5 +340,15 @@ a {
   background-color: rgba(255,147,8,0.1);
   color: #ff9308;
 }
-
+@media screen and (min-width: 1900px) {
+  .banner-image{
+    height: 860px !important;
+  }
+  .banner {
+    height: 860px !important;
+  }
+  ::v-deep .el-carousel__container{
+    height: 860px !important;
+  }
+}
 </style>

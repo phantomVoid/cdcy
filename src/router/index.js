@@ -27,6 +27,11 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/forget',
+    component: (resolve) => require(['@/views/page/forget'], resolve),
+    hidden: true
+  },
+  {
     path: '/404',
     component: (resolve) => require(['@/views/error/404'], resolve),
     hidden: true

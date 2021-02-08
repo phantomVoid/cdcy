@@ -11,15 +11,15 @@
           <div class="item server">
             <div class="type-label">区服</div>
             <div>
-              <el-radio v-model="server" label="wx">微信</el-radio>
-              <el-radio v-model="server" label="qq">QQ</el-radio>
+              <el-radio v-model="server" label="2">微信</el-radio>
+              <el-radio v-model="server" label="1">QQ</el-radio>
             </div>
           </div>
           <div class="item model">
             <div class="type-label">模式</div>
             <div>
-              <el-radio v-model="model" label="2">1V1</el-radio>
-              <el-radio v-model="model" label="8">4V4</el-radio>
+              <el-radio v-model="model" label="1">1V1</el-radio>
+              <el-radio v-model="model" label="2">4V4</el-radio>
             </div>
           </div>
           <div class="btn-box">
@@ -125,8 +125,14 @@ export default {
       timer: null
     }
   },
+  beforeCreate() {
+    const userInfo = this.$store.state.user.info
+    const userId = userInfo.id
+    this.$store.dispatch('GetInfo', { userId })
+  },
   created() {
     this.userInfo = this.$store.state.user.info
+
     this.getDicts('sys_game_status').then(res => {
       this.sysGameStatusOptions = res.data
     })
@@ -211,6 +217,7 @@ export default {
         _this.getRecordList()
         const userId = _this.userInfo.id
         _this.$store.dispatch('GetInfo', { userId })
+        _this.userInfo = _this.$store.state.user.info
 
         const recordList = _this.recordList
         const playList = []
@@ -219,8 +226,8 @@ export default {
             playList.push(record)
           }
         })
-        if (recordList.length > 0) {
-          const palyRecord = recordList.slice(0, 1)[0]
+        if (playList.length > 0) {
+          const palyRecord = playList.slice(0, 1)[0]
           if (sessionStorage.getItem(palyRecord.id)) {
             return
           }
@@ -407,6 +414,8 @@ img {
 .rule-text{
   letter-spacing:1px;
 }
+
+
 ::v-deep .el-dialog__body {
    padding: 10px 25px 25px 25px;
  }

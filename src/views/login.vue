@@ -130,7 +130,7 @@ export default {
       })
     },
     forget() {
-      this.msgWarn('暂未开放')
+      location.href=  '/forget'
     },
     getCode() {
       getCodeImg().then(res => {

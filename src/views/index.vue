@@ -75,7 +75,7 @@
         <div class="activity-title-img">
           <img src="@/assets/images/popular-activities-title.png" alt="">
         </div>
-        <div class="activites">
+        <div class="activities">
           <el-tabs v-model="hotTabName">
             <el-tab-pane label="正在进行" name="going">
               <span slot="label" class="label">正在进行</span>
@@ -218,7 +218,15 @@ export default {
       this.msgWarn('建设中')
     },
     toContact() {
-      this.msgWarn('建设中')
+      //this.msgWarn('建设中')
+      const chatInfo = sessionStorage.getItem('chatInfo')
+      if(!chatInfo){
+        this.msgWarn('请先登录系统')
+        this.$router.push({path:'/login'})
+        return
+      }
+      window.open('/chatroom/', '_blank')
+      //location.href = '/chatroom/'
     },
     toMsg() {
       this.msgWarn('建设中')
@@ -236,7 +244,6 @@ export default {
   padding: 0px;
   background-color: #fff;
   position: relative;
-  min-width: 1366px;
   .index-box {
     background: url(../assets/images/index-bg.png) no-repeat;
     background-size: 100% 100%;
@@ -253,14 +260,13 @@ img {
 
 .fast-entry {
   text-align: center;
-  height: 550px;
 
   .entry-title {
     text-align: center;
     padding: 40px 0;
 
     img {
-      width: 55%;
+      width: 65%;
       display: inline-block;
     }
   }
@@ -308,14 +314,13 @@ img {
 }
 
 ::v-deep .last-news {
-  height: 550px;
 
   .news-title {
     text-align: center;
     padding: 40px 0;
 
     img {
-      width: 55%;
+      width: 65%;
       display: inline-block;
     }
   }
@@ -441,7 +446,6 @@ img {
 }
 
 ::v-deep .popular-activities {
-  height: 650px;
   width: 100%;
 
   .activity-title-img {
@@ -449,7 +453,7 @@ img {
     padding: 30px 0 0 10px;
 
     img {
-      width: 55%;
+      width: 65%;
       display: inline-block;
     }
   }
@@ -461,7 +465,7 @@ img {
     text-align: center;
   }
 
-  .activites {
+  .activities {
     width: 60%;
     margin: 0 auto;
 
@@ -488,7 +492,6 @@ img {
     .activity {
       width: 100%;
       margin-top: 10px;
-      text-align: center;
       margin-left: 15px;
       .activity-item {
         width: 24%;
@@ -510,16 +513,39 @@ img {
         .activity-title {
           color: #fff;
           padding: 2px;
+          text-align: left;
         }
 
         .activity-time {
           color: #ff9308;
           padding: 2px;
+          text-align: left;
         }
       }
     }
   }
 
 }
-
+@media screen and (min-width: 1900px) {
+  .last-news .news-box .news-img img {
+    width: 65% !important;
+    height: 300px !important;
+  }
+  .last-news .news-box .news-all{
+    height: 300px !important;
+  }
+   .last-news .news-box .news-img .news-info{
+     width: 65% !important;
+  }
+  .popular-activities .activities .activity .activity-item .activity-img img {
+    width: 255px !important;
+    height: 142px !important;
+  }
+  .popular-activities .activities .activity{
+    margin-bottom: 5% !important;
+  }
+  ::v-deep .popular-activities .activities .el-tabs__nav.is-top {
+    margin-left: 34% !important;
+  }
+}
 </style>

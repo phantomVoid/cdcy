@@ -29,14 +29,18 @@
     >
       <el-table-column label="序号" align="center" type="index" width="50"/>
       <el-table-column label="比赛编号" align="center" prop="id" width="120"/>
-      <el-table-column label="时间" align="center" prop="startTime"/>
+      <el-table-column label="时间" align="center" prop="startTime" width="150"/>
       <el-table-column label="房间号" align="center" prop="roomNum"/>
       <el-table-column label="游戏ID" align="center" prop="gameId">
         <template slot-scope="scope">
           <span>{{ userInfo.gameId }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="比赛状态" align="center" prop="status" :formatter="gameStatusFormat"/>
+      <el-table-column label="比赛状态" align="center" prop="status">
+        <template slot-scope="scope">
+          <span :style="{color: getStatusColor(scope.row.status)}">{{ gameStatusFormat(scope.row) }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -56,14 +60,19 @@
       @pagination="getList"
     />
 
-    <el-dialog title="查看比赛详情" :visible.sync="open" width="680px" append-to-body>
+    <el-dialog title="查看比赛详情" :visible.sync="open" width="700px" center append-to-body>
       <el-row :gutter="20">
-        <el-col :span="12">
+        <el-col :span="10">
           <div class="detail-item">
             比赛编号：{{ recordDetail.id }}
           </div>
         </el-col>
-        <el-col :span="12">
+        <el-col :span="6">
+          <div class="detail-item">
+            比赛状态：<span :style="'color:'+getStatusColor(recordDetail.status)">{{ gameStatusFormat(recordDetail) }}</span>
+          </div>
+        </el-col>
+        <el-col :span="8">
           <div class="detail-item">
             时间：{{ recordDetail.startTime }}
           </div>
@@ -71,51 +80,45 @@
       </el-row>
 
       <el-row :gutter="20">
-        <el-col :span="12">
+        <el-col :span="10">
           <div class="detail-item">
             房间号：{{ recordDetail.roomNum }}
           </div>
         </el-col>
-        <el-col :span="12">
+        <el-col :span="6">
           <div class="detail-item">
             房间密码：{{ recordDetail.password }}
           </div>
         </el-col>
-      </el-row>
-
-      <el-row :gutter="20">
-        <el-col :span="12">
-          <div class="detail-item">
-<!--            比赛区服：{{ recordDetail.server ==='qq'?'QQ':'微信' }}-->
-            比赛区服：{{ gameServerFormat(recordDetail) }}
-          </div>
-        </el-col>
-        <el-col :span="12">
-          <div class="detail-item">
-            比赛模式：{{ gameTypeFormat(recordDetail) }}
-          </div>
-        </el-col>
-      </el-row>
-
-      <el-row :gutter="20">
-        <el-col :span="12">
-          <div class="detail-item">
-            比赛状态：{{ gameStatusFormat(recordDetail) }}
-          </div>
-        </el-col>
-        <el-col :span="12">
+        <el-col :span="8">
           <div class="detail-item">
             游戏id：{{ userInfo.gameId }}
           </div>
         </el-col>
       </el-row>
       <el-row :gutter="20">
-        <el-col :span="12">
+        <el-col :span="24">
           <div class="detail-item">
             比赛结束时间：{{ recordDetail.endTime }}
           </div>
         </el-col>
       </el-row>
+
+      <el-divider></el-divider>
+      <el-row :gutter="20">
+        <el-col :span="10">
+          <div class="detail-item">
+            <!--            比赛区服：{{ recordDetail.server ==='qq'?'QQ':'微信' }}-->
+            比赛区服：{{ gameServerFormat(recordDetail) }}
+          </div>
+        </el-col>
+        <el-col :span="8">
+          <div class="detail-item">
+            比赛模式：{{ gameTypeFormat(recordDetail) }}
+          </div>
+        </el-col>
+      </el-row>
+      <el-button type="primary" class="close-btn" @click="open=false">关 闭</el-button>
     </el-dialog>
   </div>
 </template>
@@ -235,6 +238,19 @@ export default {
       }).catch(err => {
         this.loading = false
       })
+    },
+    getStatusColor(val) {
+      if (val === 0) {
+        return '#0090ff'
+      } else if (val === 1) {
+        return '#00ee65'
+      } else if (val === 2) {
+        return '#ffe201'
+      } else if (val === 3) {
+        return '#ff4d4f'
+      } else {
+        return '#d1d1d1'
+      }
     }
   }
 }
@@ -249,5 +265,41 @@ export default {
 
 .detail-item{
   margin: 10px 0;
+}
+
+::v-deep .el-dialog {
+  background: none;
+}
+::v-deep .el-dialog__header {
+  background-color: #444444;
+  background: #444444;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  .el-dialog__title{
+    color: #fff;
+  }
+}
+::v-deep .el-dialog__body{
+  background-color: #333333;
+  background: #333333;
+  color: #fff;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+::v-deep .el-divider {
+  background-color: #666666;
+}
+.el-divider.el-divider--horizontal {
+  margin: 10px 0;
+}
+
+.close-btn{
+  width: 50%;
+  height: 35px;
+  display: inline-block;
+  text-align: center;
+  margin: 45px 25% 20px 25%;
+  font-weight: 600;
 }
 </style>

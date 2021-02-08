@@ -54,6 +54,12 @@ const user = {
         getInfo(state.userId).then(res => {
           const {data} = res
           commit('SET_INFO', data)
+          const chatInfo = {
+            userId: data.id,
+            username: data.name+'（'+data.phone+'）',
+            type: 'guess'
+          }
+          sessionStorage.setItem("chatInfo",JSON.stringify(chatInfo))
           resolve(res)
         }).catch(error => {
           reject(error)
@@ -67,6 +73,7 @@ const user = {
           commit('SET_INFO', {})
           commit('SET_USER_ID', '')
           removeToken()
+          sessionStorage.removeItem("chatInfo")
           resolve()
         // logout(state.token).then(() => {
         //   commit('SET_TOKEN', '')
