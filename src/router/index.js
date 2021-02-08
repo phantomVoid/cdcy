@@ -23,7 +23,7 @@ export const constantRoutes = [
   },
   {
     path: '/register',
-    component: (resolve) => require(['@/views/page/register'], resolve),
+    component: (resolve) => require(['@/views/pc/page/register'], resolve),
     hidden: true
   },
   {

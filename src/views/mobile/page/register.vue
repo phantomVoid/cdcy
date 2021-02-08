@@ -1,4 +1,4 @@
-<script src="../../api/login.js"></script>
+<script src="../../../api/login.js"></script>
 <template>
   <div class="login">
     <el-form ref="registerForm" :model="registerForm" :rules="loginRules" class="login-form" label-width="80px">
@@ -42,7 +42,7 @@
       <el-form-item prop="code" label="验证码">
         <el-input v-model="registerForm.code" type="text" auto-complete="off" placeholder="验证码" style="width: 62%"
         ></el-input>
-        <el-button style="float: right; margin-top: 0px;width: 100px" @click="getRegCode" :disabled="codeDisable">
+        <el-button class="regCodeBtn" @click="getRegCode" :disabled="codeDisable">
           {{codeLabel}}
         </el-button>
       </el-form-item>
@@ -64,7 +64,7 @@
           @click.native.prevent="handleReset"
         ><span>重 置</span>
         </el-button>
-        <div style="text-align:center;margin-top: 10px;margin-left:-40px;color: #fff">已有账号, <a href="/login" style="color: #ff9308">去登录</a></div>
+        <div style="text-align:center;margin-top: 10px;margin-left:-40px;color: #fff">已有账号, <a href="/mobile/login" style="color: #ff9308">去登录</a></div>
       </el-form-item>
 
     </el-form>
@@ -219,14 +219,146 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  background: #ffffff url(../../assets/images/login-bg.jpg) no-repeat;
-  background-size: 118% 100%;
+
+
+/* 手机屏幕的字体大小 */
+@media screen and (max-width: 768px) {
+  .login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background: #ffffff url(../../../assets/mobile/images/login-bg.jpg) no-repeat;
+    background-size: 118% 100%;
+  }
+
+  .login-form {
+    border-radius: 6px;
+    background: rgba(45, 45, 44, 0.8);
+    width: 100%;
+    padding: 10px 20px 5px 20px;
+    border: 1px solid rgba(45, 45, 44, 0.5);
+
+    .el-input {
+      height: 36px;
+
+      input {
+        height: 38px;
+      }
+    }
+    .el-form-item {
+      margin-bottom: 18px;
+    }
+    .input-icon {
+      height: 39px;
+      width: 14px;
+      margin-left: 2px;
+    }
+  }
+
+  .el-button--medium{
+    padding: 10px 0px;
+    font-size: 14px;
+    border-radius: 4px;
+  }
+  .regCodeBtn{
+    float: right;
+    margin-top: 0px;
+    width: 80px;
+  }
 }
+/* 笔记本电脑的字体大小 */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background: #ffffff url(../../../assets/images/login-bg.jpg) no-repeat;
+    background-size: 118% 100%;
+  }
+
+  .login-form {
+    border-radius: 6px;
+    background: rgba(45, 45, 44, 0.8);
+    width: 460px;
+    padding: 20px 40px 5px 40px;
+    border: 1px solid rgba(45, 45, 44, 0.5);
+
+    .el-input {
+      height: 36px;
+
+      input {
+        height: 38px;
+      }
+    }
+    .el-form-item {
+      margin-bottom: 18px;
+    }
+    .input-icon {
+      height: 39px;
+      width: 14px;
+      margin-left: 2px;
+    }
+  }
+
+  .regCodeBtn{
+    float: right;
+    margin-top: 0px;
+    width: 100px;
+  }
+}
+/* 台式电脑显示器屏幕字体大小 */
+@media screen and (min-width: 1024px) {
+  .login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background: #ffffff url(../../../assets/images/login-bg.jpg) no-repeat;
+    background-size: 118% 100%;
+  }
+
+  .login-form {
+    border-radius: 6px;
+    background: rgba(45, 45, 44, 0.8);
+    width: 460px;
+    padding: 20px 40px 5px 40px;
+    border: 1px solid rgba(45, 45, 44, 0.5);
+
+    .el-input {
+      height: 36px;
+
+      input {
+        height: 38px;
+      }
+    }
+    .el-form-item {
+      margin-bottom: 18px;
+    }
+    .input-icon {
+      height: 39px;
+      width: 14px;
+      margin-left: 2px;
+    }
+  }
+
+  .regCodeBtn{
+    float: right;
+    margin-top: 0px;
+    width: 100px;
+  }
+}
+
+
+//.login {
+//  display: flex;
+//  justify-content: center;
+//  align-items: center;
+//  height: 100%;
+//  background: #ffffff url(../../../assets/images/login-bg.jpg) no-repeat;
+//  background-size: 118% 100%;
+//}
 
 .title {
   margin: 0px auto 15px auto;
@@ -234,29 +366,29 @@ export default {
   color: #ff9308;
 }
 
-.login-form {
-  border-radius: 6px;
-  background: rgba(45, 45, 44, 0.8);
-  width: 460px;
-  padding: 20px 40px 5px 40px;
-  border: 1px solid rgba(45, 45, 44, 0.5);
-
-  .el-input {
-    height: 36px;
-
-    input {
-      height: 38px;
-    }
-  }
-  .el-form-item {
-    margin-bottom: 18px;
-  }
-  .input-icon {
-    height: 39px;
-    width: 14px;
-    margin-left: 2px;
-  }
-}
+//.login-form {
+//  border-radius: 6px;
+//  background: rgba(45, 45, 44, 0.8);
+//  width: 460px;
+//  padding: 20px 40px 5px 40px;
+//  border: 1px solid rgba(45, 45, 44, 0.5);
+//
+//  .el-input {
+//    height: 36px;
+//
+//    input {
+//      height: 38px;
+//    }
+//  }
+//  .el-form-item {
+//    margin-bottom: 18px;
+//  }
+//  .input-icon {
+//    height: 39px;
+//    width: 14px;
+//    margin-left: 2px;
+//  }
+//}
 
 .login-img {
   width: 400px;
