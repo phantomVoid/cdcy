@@ -17,11 +17,11 @@ router.beforeEach((to, from, next) => {
 
   if (flag) {
     if (to.path.indexOf("mobile") === -1) {
-      to = {
-        path: "/mobile" + to.path
-      }
-      console.log(" new from.path -> to.path: >>> " + from.path + " -> " + to.path);
       if (to.path !== from.path) {
+        to = {
+          path: "/mobile" + to.path
+        }
+        console.log(" new from.path -> to.path: >>> " + from.path + " -> " + to.path);
         router.replace(to.path).catch(e => ({}));
       }
     }

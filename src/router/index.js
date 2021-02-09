@@ -106,7 +106,7 @@ export const constantRoutes = [
       {
         path:'/mobile/bonus',
         name: "积分商城",
-        component: resolve => require(['@/views/page/bonus'], resolve),
+        component: resolve => require(['@/views/mobile/page/bonus'], resolve),
         meta: {
           title: '积分商城'
         }
@@ -114,7 +114,7 @@ export const constantRoutes = [
       {
         path:'/mobile/join',
         name: "报名中心",
-        component: resolve => require(['@/views/page/join'], resolve),
+        component: resolve => require(['@/views/mobile/page/join'], resolve),
         meta: {
           title: '报名中心'
         }
@@ -122,7 +122,7 @@ export const constantRoutes = [
       {
         path:'/mobile/user',
         name: "个人中心",
-        component: resolve => require(['@/views/page/user/index'], resolve),
+        component: resolve => require(['@/views/mobile/page/user/index'], resolve),
         meta: {
           title: '个人中心'
         }
