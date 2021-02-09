@@ -221,15 +221,7 @@ export default {
       this.msgWarn('建设中')
     },
     toContact() {
-      //this.msgWarn('建设中')
-      const chatInfo = sessionStorage.getItem('chatInfo')
-      if(!chatInfo){
-        this.msgWarn('请先登录系统')
-        this.$router.push({path:'/login'})
-        return
-      }
-      window.open('/chatroom/', '_blank')
-      //location.href = '/chatroom/'
+      this.$router.push("/ws/chat")
     },
     toMsg() {
       this.msgWarn('建设中')

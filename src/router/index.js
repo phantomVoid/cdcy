@@ -185,6 +185,16 @@ export const constantRoutes = [
     component: (resolve) => require(['@/views/mobile/page/register'], resolve),
     hidden: true
   },
+  {
+    path: '/mobile/ws/chat',
+    component: (resolve) => require(['@/views/mobile/page/wschat'], resolve),
+    hidden: true
+  },
+  {
+    path: '/ws/chat',
+    component: (resolve) => require(['@/views/page/wschat'], resolve),
+    hidden: true
+  }
   /*-- mobile routes [end] --*/
 ]
 

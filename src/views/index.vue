@@ -150,6 +150,8 @@
 
 <script>
 
+import Cookies from "js-cookie";
+
 export default {
   name: 'Index',
   components: {},
@@ -218,15 +220,10 @@ export default {
       this.msgWarn('建设中')
     },
     toContact() {
-      //this.msgWarn('建设中')
-      const chatInfo = sessionStorage.getItem('chatInfo')
-      if(!chatInfo){
-        this.msgWarn('请先登录系统')
-        this.$router.push({path:'/login'})
-        return
+      let data = {
+        path: '/ws/chat'
       }
-      window.open('/chatroom/', '_blank')
-      //location.href = '/chatroom/'
+      this.$router.push(data)
     },
     toMsg() {
       this.msgWarn('建设中')

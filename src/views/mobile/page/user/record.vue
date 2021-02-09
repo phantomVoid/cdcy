@@ -135,7 +135,7 @@ export default {
         startTime: startTime,
         endTime: endTime,
         orderByColumn: 'log_time',
-        isAsc: 'desc'
+        isAsc: 'asc'
       }
       getRecordList(params).then(res => {
         console.log(res);
