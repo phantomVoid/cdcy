@@ -770,7 +770,7 @@ img {
   }
 
   .activites {
-    width: 100%;
+    width: 80%;
     margin: 0 auto;
 
     .el-tabs__item.is-top {
@@ -812,8 +812,10 @@ img {
           cursor: pointer;
 
           img {
-            width: 180px;
-            height: 102px;
+            //width: 180px;
+            //height: 102px;
+            width: 85%;
+            height: auto;
           }
         }
 
