@@ -11,24 +11,16 @@
         <div class="select">
           <div class="item server">
             <div class="type-label">区服</div>
-            <div class="raidoDiv">
-              <el-radio v-model="server" label="2">
-                <img v-model="server" height="36px" width="36px" src="@/assets/mobile/images/wechat.png" alt="">
-              </el-radio>
-              <el-radio v-model="server" label="1">
-                <img v-model="server" height="36px" width="36px" src="@/assets/mobile/images/QQ.png" alt="">
-              </el-radio>
+            <div>
+              <el-radio v-model="server" label="2">微信</el-radio>
+              <el-radio v-model="server" label="1">QQ</el-radio>
             </div>
           </div>
           <div class="item model">
             <div class="type-label">模式</div>
-            <div class="raidoDiv">
-              <el-radio v-model="model" label="1">
-                <img v-model="model" height="36px" width="36px" src="@/assets/mobile/images/1v1.png" alt="">
-              </el-radio>
-              <el-radio v-model="model" label="2">
-                <img v-model="model" height="36px" width="36px" src="@/assets/mobile/images/4v4.png" alt="">
-              </el-radio>
+            <div>
+              <el-radio v-model="model" label="1">1V1</el-radio>
+              <el-radio v-model="model" label="2">4V4</el-radio>
             </div>
           </div>
           <div class="btn-box">
@@ -259,9 +251,9 @@ img {
 
 
 
-::v-deep .el-radio__input {
-  display: none;
-}
+//::v-deep .el-radio__input {
+//  display: none;
+//}
 
 ::v-deep .raidoDiv {
   margin-top: -5px;
@@ -347,7 +339,7 @@ img {
       width: 100%;
       height: 30px;
       background-color: #ff9308;
-      //margin-bottom: 25px;
+      margin-bottom: 25px;
       font-size: 16px;
       border: 0px;
     }
