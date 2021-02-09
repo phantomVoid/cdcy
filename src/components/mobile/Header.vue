@@ -162,6 +162,17 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+@media screen and (min-width: 1900px) {
+  .banner-image{
+    height: 860px !important;
+  }
+  .banner {
+    height: 860px !important;
+  }
+  ::v-deep .el-carousel__container{
+    height: 860px !important;
+  }
+}
 
 img {
   image-rendering: -moz-crisp-edges; /* Firefox */
@@ -182,7 +193,6 @@ img {
 }
 
 .banner, .banner .block, .banner > > > .el-carousel .el-carousel--horizontal, .banner > > > .el-carousel__container {
-  height: 100% !important;
   overflow: hidden;
 }
 
