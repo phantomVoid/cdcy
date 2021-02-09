@@ -1,70 +1,36 @@
 <template>
-  <div class="box">
-    <el-form :model="queryParams" ref="queryForm" :inline="true" label-width="68px">
-      <el-form-item label="时间" prop="time">
-        <el-date-picker
-          v-model="queryParams.time"
-          type="datetimerange"
-          align="right"
-          unlink-panels
-          range-separator="至"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-          value-format="yyyy-MM-dd HH:mm:ss"
-          :picker-options="pickerOptions"
-        >
-        </el-date-picker>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
-      </el-form-item>
-    </el-form>
-
-    <el-table
-      v-loading="loading"
-      :data="recordList"
-      row-key="id"
-      border
-    >
-      <el-table-column label="序号" align="center" type="index" width="50"/>
-      <el-table-column label="流水号" align="center" prop="id"/>
-      <el-table-column label="时间" align="center" prop="logTime" width="150"/>
-      <el-table-column label="支付类型" align="center" prop="orderType" :formatter="payTypeFormat"/>
-      <el-table-column label="订单状态" align="center" prop="tranStatus" :formatter="tranStatusFormat"/>
-      <el-table-column label="金额" align="center" prop="amount"/>
-      <el-table-column label="备注" align="center" prop="remark"/>
-    </el-table>
-    <pagination
-      :total="total"
-      :page.sync="queryParams.pageNum"
-      :limit.sync="queryParams.pageSize"
-      @pagination="getList"
-    />
+  <div class="container">
+    <div class="index-box">
+      <div class="last-news">
+        <div class="news-box">
+          <div class="news-all">
+            <el-tabs v-model="newsTabName">
+              <el-tab-pane label="充值明细" name="complex">
+                <span slot="label" style="font-size: 16px">充值明细</span>
+                <div class="news-box">
+                  <div class="news-items">
+                    <div class="news-item" v-for="(row ,index) in recordList" :key="index" >
+                      <p>
+                        <span class="news-type">{{ row.id }}</span>
+                        <span class="news-time">+ {{ row.amount }}</span>
+                        <br/><span class="news-title">支付类型: {{ payTypeFormat(row) }}</span>
+                        <br/><span class="news-title">比赛时间: {{ row.logTime }}</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </el-tab-pane>
+            </el-tabs>
+            <div class="more-news" @click="backToUserCenter">返回</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
-<style lang="scss" scoped>
-.box {
-  padding-left: 10px;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  background-color: #1a1a1a;
-  ::v-deep .el-tabs__item{
-    height: 35px;
-    line-height: 35px;
-    font-size: 15px;
-    padding: 0 20px;
-  }
-
-  ::v-deep .el-form-item__label{
-    color: #fff;
-    font-weight: 500;
-  }
-}
-</style>
-
 <script>
+
 import { getPayDetail } from '@/api/user'
 
 export default {
@@ -107,6 +73,8 @@ export default {
           }
         }]
       },
+      integralTypeOptions: [],
+      newsTabName: 'complex',
       userInfo: {},
       payTypeOptions: [],
       tranStatusOptions: []
@@ -128,17 +96,21 @@ export default {
   methods: {
     getList() {
       this.loading = true
-      this.getPayDetail()
+      this.getPayDetail();
     },
     payTypeFormat(row, column) {
+      console.log("this is payTypeFormat function: >>> ");
+      console.log(JSON.stringify(row));
       return this.selectDictLabel(this.payTypeOptions, row.orderType)
     },
     tranStatusFormat(row, column) {
       return this.selectDictLabel(this.tranStatusOptions, row.tranStatus)
     },
+
     handleQuery() {
       this.getList()
     },
+
     resetQuery() {
       this.resetForm('queryForm')
       this.handleQuery()
@@ -147,6 +119,7 @@ export default {
 
     },
     getPayDetail() {
+      console.log("this is getPayDetail function: >>> ");
       let startTime = ''
       let endTime = ''
       try {
@@ -164,13 +137,142 @@ export default {
         isAsc: 'desc'
       }
       getPayDetail(params).then(res => {
-        this.recordList = res.rows
-        this.total = res.total
+        console.log(res);
+        this.recordList = res.rows;
+        this.total = res.total;
         this.loading = false
       }).catch(err => {
         this.loading = false
-      })
+      });
+      console.log(this.recordList);
+    },
+    backToUserCenter() {
+      this.$router.push("/user").catch(e => {
+      });
+    }
+  },
+}
+</script>
+
+<style lang="scss" scoped>
+
+/* 手机屏幕的字体大小 */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 0px;
+    background-color: #fff;
+    position: relative;
+    //min-width: 1366px;
+    width: 100%;
+    height: auto;
+
+    .index-box {
+      background-color: #1a1a1a;
+      background-size: 100% 100%;
+    }
+  }
+
+  ::v-deep .last-news {
+    height: auto;
+
+    .news-title {
+      text-align: center;
+      padding: 0 0;
+    }
+
+    .news-box {
+      .el-tabs__item.is-top {
+        color: #fff !important;
+      }
+
+      .el-tabs__item.is-top.is-active {
+        color: #ff9308 !important;
+      }
+
+      .el-tabs__nav-wrap::after {
+        display: none !important;
+      }
+
+      .el-tabs__active-bar.is-top {
+        background-color: #ff9308 !important;
+      }
+
+
+      .news-all {
+        display: inline-block;
+        width: 100%;
+        background-color: #333333;
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+        height: 100%;
+        padding-bottom: 20px;
+        position: relative;
+        margin-bottom: 0.5rem;
+
+        .el-tabs__header {
+          margin: 0 !important;
+        }
+
+        .el-tabs__nav.is-top {
+          margin-left: 25px;
+        }
+
+        .news-box {
+          .news-items {
+            padding: 15px 25px;
+            margin: 5px 0px;
+            .news-item {
+              border-bottom: 1px solid #424242;
+              height: 80px;
+              margin-top: 10px;
+              padding-top: 0px;
+              line-height: 20px;
+              cursor: pointer;
+
+              .news-type {
+                color: #ffffff;
+                padding-right: 5px;
+                font-size: 14px;
+              }
+
+              .news-title {
+                font-size: 12px;
+                color: #999999;
+              }
+
+              .news-time {
+                font-size: 12px;
+                color: #999999;
+                text-align: right;
+                float: right;
+              }
+
+              &:last-child {
+                border-bottom: none;
+              }
+            }
+          }
+
+        }
+
+        .more-news {
+          font-size: 14px;
+          color: #ffffff;
+          position: absolute;
+          right: 6%;
+          top: 10px;
+          cursor: pointer;
+        }
+      }
     }
   }
 }
-</script>
+
+img {
+  image-rendering: -moz-crisp-edges; /* Firefox */
+  image-rendering: -o-crisp-edges; /* Opera */
+  image-rendering: -webkit-optimize-contrast; /*Webkit (non-standard naming) */
+  image-rendering: crisp-edges;
+  -ms-interpolation-mode: nearest-neighbor; /* IE (non-standard property) */
+}
+</style>
