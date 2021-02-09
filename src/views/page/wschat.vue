@@ -108,18 +108,16 @@ export default {
         ws.onopen = function (e) {
           console.log("服务器连接成功");
           let data = {
-            "userId": this.userId,
+            "userId": _this.userId,
             "type": "REGISTER"
           };
           console.log(data)
           ws.send(JSON.stringify(data));
         };
-        ws.onclose = function (e) {
-          let resData = JSON.parse(e);
-          console.log(resData)
+        ws.onclose = function () {
           _this.list = [
             ..._this.list,
-            {userId: resData.userId, content: "连接已关闭"}
+            {userId: '1', content: "连接已关闭"}
           ];
           console.log("服务器连接关闭");
         };
