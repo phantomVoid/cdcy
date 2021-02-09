@@ -13,27 +13,31 @@
       <el-radio v-model="payType" label="2" @change="changeLabel">
         <img src="@/assets/images/alipay.png" class="pay-img" ref="alipay">
       </el-radio>
-      <el-radio v-model="payType" label="1" style="margin-top: 15px"  @change="changeLabel">
+      <el-radio v-model="payType" label="1" style="margin-top: 15px" @change="changeLabel">
         <img src="@/assets/images/wxpay.png" class="pay-img" ref="wx">
       </el-radio>
     </div>
     <div style="width: 600px">
-<pre class="notice">
-温馨提示：
-不支持信用卡方式充值。
-如您有未结清账单，充值后优先抵扣未结清账单。
-充值后请及时对支付订单进行结算，以免影响正常服务。在您消费后，阿里云将基于您的消费进行发票开具。
-</pre>
+      <pre class="notice">
+      温馨提示：
+      不支持信用卡方式充值。
+      如您有未结清账单，充值后优先抵扣未结清账单。
+      充值后请及时对支付订单进行结算，以免影响正常服务。在您消费后，阿里云将基于您的消费进行发票开具。
+      </pre>
     </div>
     <div class="check">
       <el-checkbox v-model="agree">我已了解，充值规则</el-checkbox>
     </div>
     <el-button type="primary" @click="pay">充值</el-button>
+
+    <el-dialog title="支付" :visible.sync="open" width="350px" center append-to-body>
+      <div v-html="payReturn" class="pay-dialog"></div>
+    </el-dialog>
   </div>
 </template>
 
 <script scoped>
-import {pay} from '@/api/pay'
+import {newTranZfb, pay} from '@/api/pay'
 
 export default {
   name: 'pay',
@@ -44,7 +48,9 @@ export default {
       payType: '',
       bonus: '',
       agree: false,
-      amount: null
+      amount: null,
+      open: false,
+      payReturn: ''
     }
   },
   created() {
@@ -57,12 +63,17 @@ export default {
       // this.$emit('handleBtn', id)
       let pushUrl = "/user/" + id;
       console.log("pushUrl: >>> " + pushUrl);
-      this.$router.push(pushUrl).catch(e => {});
+      this.$router.push(pushUrl).catch(e => {
+      });
     },
     pay() {
       const amount = this.amount
       if (amount === null || amount === '') {
         this.msgError('请输入充值积分')
+        return
+      }
+      if (amount < 10 || amount > 2000) {
+        this.msgError('充值积分数必须大于10或者小于2000')
         return
       }
       var reg = /^[1-9]\d*$/
@@ -74,16 +85,40 @@ export default {
         this.msgError('请阅读并勾选充值规则')
         return
       }
+      if (this.payType === '2') {
+        this.payZfb()
+      }
+      if (this.payType === '1') {
+        this.payWx()
+      }
     },
-    changeLabel(val){
-      if(val === '2'){
+    changeLabel(val) {
+      if (val === '2') {
         this.$refs['alipay'].style = 'border:2px solid #ff9308'
         this.$refs['wx'].style = 'border:2px solid transparent;'
       }
-      if(val === '1'){
+      if (val === '1') {
         this.$refs['wx'].style = 'border:2px solid #ff9308'
         this.$refs['alipay'].style = 'border:2px solid transparent;'
       }
+    },
+    payZfb() {
+      const params = {
+        userId: this.userInfo.id,
+        amount: this.amount,
+      }
+      newTranZfb(params).then(res => {
+        if (res == '') {
+          this.msgWarn('网络异常，请稍后再试')
+          return
+        }
+        this.payReturn = res
+        this.open = true
+        console.log(res)
+      })
+    },
+    payWx() {
+      this.msgWarn('微信支付正在建设中')
     }
   },
   mounted() {
@@ -101,8 +136,9 @@ img {
   image-rendering: crisp-edges;
   -ms-interpolation-mode: nearest-neighbor; /* IE (non-standard property) */
 }
+
 .notice {
-  margin:0 0 20px 0;
+  margin: 0 0 20px 0;
   width: 600px;
   padding: 10px 0px;
   font-size: 12px;
@@ -112,7 +148,8 @@ img {
 .pay-type {
   margin-top: 10px;
   color: #fff;
-  .pay-img{
+
+  .pay-img {
     display: inline-block;
   }
 }
@@ -155,7 +192,7 @@ img {
   border-color: #fd9208;
 }
 
-::v-deep .el-range-input{
+::v-deep .el-range-input {
   background-color: #1a1a1a;
 }
 
@@ -172,12 +209,13 @@ img {
 }
 
 
-::v-deep .el-radio__inner{
+::v-deep .el-radio__inner {
 }
 
-::v-deep .el-radio__label{
+::v-deep .el-radio__label {
   color: #fff;
 }
+
 ::v-deep .el-radio__input.is-checked .el-radio__inner {
   border-color: #ff9308;
   background: #ff9308;
@@ -187,8 +225,26 @@ img {
   color: #ff9308;
 }
 
-::v-deep .el-radio__input{
+::v-deep .el-radio__input {
   display: none;
 }
 
+::v-deep .pay-dialog {
+  height: 70px;
+
+  form[name="punchout_form"] {
+    input[type="submit"] {
+      background: #ff9308;
+      width: 100px;
+      font-size: 16px;
+      height: 40px;
+      color: #000;
+      margin: 0 auto;
+      border: 1px solid #ff9308;
+      border-radius: 4px;
+      display: block !important;
+    }
+  }
+
+}
 </style>
