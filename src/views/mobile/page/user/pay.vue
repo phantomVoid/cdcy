@@ -54,7 +54,10 @@ export default {
   methods: {
     handleClick(event) {
       const id = event.currentTarget.className
-      this.$emit('handleBtn', id)
+      // this.$emit('handleBtn', id)
+      let pushUrl = "/user/" + id;
+      console.log("pushUrl: >>> " + pushUrl);
+      this.$router.push(pushUrl).catch(e => {});
     },
     pay() {
       const amount = this.amount
@@ -119,7 +122,8 @@ img {
 }
 
 .bonus {
-  margin: 20px 0;
+  //margin: 20px 0;
+  padding: 20px 0;
   color: #fff;
   font-size: 15px;
 }
@@ -149,6 +153,10 @@ img {
 ::v-deep .el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner {
   background-color: #fd9208;
   border-color: #fd9208;
+}
+
+::v-deep .el-range-input{
+  background-color: #1a1a1a;
 }
 
 ::v-deep .el-checkbox__input.is-checked + .el-checkbox__label {
