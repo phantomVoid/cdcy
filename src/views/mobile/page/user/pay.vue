@@ -137,7 +137,9 @@ img {
 }
 
 .box {
-  margin-left: 10px
+  padding-left: 10px;
+  padding-bottom: 30px;
+  background-color: #1a1a1a;
 }
 
 ::v-deep .el-checkbox__label {

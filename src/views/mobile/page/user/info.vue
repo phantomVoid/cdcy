@@ -265,8 +265,10 @@ export default {
 }
 
 .box {
-  margin-left: 10px;
-
+  //margin-left: 10px;
+  padding-left: 10px;
+  padding-bottom: 30px;
+  background-color: #1a1a1a;
   ::v-deep .el-tabs__item{
     height: 35px;
     line-height: 35px;

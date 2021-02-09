@@ -126,6 +126,52 @@ export const constantRoutes = [
         meta: {
           title: '个人中心'
         }
+      },
+      {
+        path:'/mobile/user/myBonus',
+        name: "我的积分",
+        component: resolve => require(['@/views/mobile/page/user/myBonus'], resolve),
+        meta: {
+          title: '我的积分'
+        }
+      },
+      {
+        path:'/mobile/user/info',
+        name: "用户信息",
+        component: resolve => require(['@/views/mobile/page/user/info'], resolve),
+        meta: {
+          title: '用户信息'
+        }
+      },
+      {
+        path:'/mobile/user/record',
+        name: "参赛记录",
+        component: resolve => require(['@/views/mobile/page/user/record'], resolve),
+        meta: {
+          title: '参赛记录'
+        }
+      },
+      {
+        path:'/mobile/user/bonusDetail',
+        name: "积分明细",
+        component: resolve => require(['@/views/mobile/page/user/bonusDetail'], resolve),
+        meta: {
+          title: '积分明细'
+        }
+      },{
+        path:'/mobile/user/payDetail',
+        name: "充值明细",
+        component: resolve => require(['@/views/mobile/page/user/payDetail'], resolve),
+        meta: {
+          title: '充值明细'
+        }
+      },{
+        path:'/mobile/user/pay',
+        name: "充值",
+        component: resolve => require(['@/views/mobile/page/user/pay'], resolve),
+        meta: {
+          title: '充值'
+        }
       }
     ]
   },

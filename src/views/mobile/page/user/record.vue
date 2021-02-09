@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="box">
     <el-form :model="queryParams" ref="queryForm" :inline="true" label-width="68px">
       <el-form-item label="时间" prop="time">
         <el-date-picker
@@ -256,6 +256,26 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+
+.box {
+  padding-left: 10px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-color: #1a1a1a;
+  ::v-deep .el-tabs__item{
+    height: 35px;
+    line-height: 35px;
+    font-size: 15px;
+    padding: 0 20px;
+  }
+
+  ::v-deep .el-form-item__label{
+    color: #fff;
+    font-weight: 500;
+  }
+}
+
+
 ::v-deep .el-dialog__body {
   padding: 5px 30px 20px 30px;
   color: #606266;

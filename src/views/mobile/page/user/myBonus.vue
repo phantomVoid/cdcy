@@ -30,8 +30,10 @@ export default {
   },
   methods: {
     handleClick(event) {
-      const id = event.currentTarget.id
-      this.$emit('handleBtn', id)
+      const id = event.currentTarget.id;
+      // this.$emit('handleBtn', id);
+      let pushUrl = "/user/" + id;
+      this.$router.push(pushUrl).catch(e => {});
     }
   },
   mounted() {
@@ -52,9 +54,10 @@ export default {
 
 .box {
   width: 100%;
-  margin: 20px auto;
+  background-color: #1a1a1a;
   text-align: center;
   padding-top: 30px;
+  padding-bottom: 30px;
   .button {
     margin-top: 40px;
   }
