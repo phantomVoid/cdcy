@@ -221,7 +221,7 @@ export default {
       this.msgWarn('建设中')
     },
     toContact() {
-      this.$router.push("/ws/chat")
+      this.$router.push("/ws/chat").catch(e => {})
     },
     toMsg() {
       this.msgWarn('建设中')

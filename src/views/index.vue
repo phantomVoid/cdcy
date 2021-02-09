@@ -223,7 +223,7 @@ export default {
       let data = {
         path: '/ws/chat'
       }
-      this.$router.push(data)
+      this.$router.push(data).catch(e => {})
     },
     toMsg() {
       this.msgWarn('建设中')
