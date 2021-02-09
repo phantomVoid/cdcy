@@ -271,6 +271,7 @@ export default {
   background-color: #1a1a1a;
   ::v-deep .el-tabs__item{
     height: 35px;
+    color: white;
     line-height: 35px;
     font-size: 15px;
     padding: 0 20px;
