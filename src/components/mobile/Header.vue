@@ -324,7 +324,7 @@ img {
   .info {
     display: inline-block;
     vertical-align: top;
-    margin-top: 18px;
+    //margin-top: 18px;
 
     .el-dropdown-link {
       font-size: 16px;
