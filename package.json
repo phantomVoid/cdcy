@@ -29,7 +29,7 @@
     "url": ""
   },
   "dependencies": {
-    "axios": "0.21.0",
+    "axios": "^0.21.1",
     "core-js": "3.8.1",
     "element-ui": "2.15.0",
     "js-cookie": "2.2.1",
