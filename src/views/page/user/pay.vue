@@ -29,11 +29,17 @@
       <el-checkbox v-model="agree">我已了解，充值规则</el-checkbox>
     </div>
     <el-button type="primary" @click="pay">充值</el-button>
+
+    <el-dialog title="支付" :visible.sync="open" width="350px" center append-to-body>
+      <div v-html="payReturn" class="pay-dialog"></div>
+    </el-dialog>
   </div>
+
+
 </template>
 
 <script scoped>
-import {pay} from '@/api/pay'
+import {pay,newTranZfb} from '@/api/pay'
 
 export default {
   name: 'pay',
@@ -44,7 +50,9 @@ export default {
       payType: '',
       bonus: '',
       agree: false,
-      amount: null
+      amount: null,
+      open: false,
+      payReturn: ''
     }
   },
   created() {
@@ -62,6 +70,10 @@ export default {
         this.msgError('请输入充值积分')
         return
       }
+      if(amount < 10 || amount > 2000){
+        this.msgError('充值积分数必须大于10或者小于2000')
+        return
+      }
       var reg = /^[1-9]\d*$/
       if (!reg.test(amount)) {
         this.msgError('充值积分输入不正确')
@@ -70,6 +82,12 @@ export default {
       if (!this.agree) {
         this.msgError('请阅读并勾选充值规则')
         return
+      }
+      if(this.payType === '2'){
+        this.payZfb()
+      }
+      if(this.payType === '1'){
+        this.payWx()
       }
     },
     changeLabel(val){
@@ -81,6 +99,24 @@ export default {
         this.$refs['wx'].style = 'border:2px solid #ff9308'
         this.$refs['alipay'].style = 'border:2px solid transparent;'
       }
+    },
+    payZfb(){
+      const params = {
+        userId: this.userInfo.id,
+        amount: this.amount,
+      }
+      newTranZfb(params).then(res=>{
+        if(res == ''){
+          this.msgWarn('网络异常，请稍后再试')
+          return
+        }
+        this.payReturn = res
+        this.open = true
+        console.log(res)
+      })
+    },
+    payWx(){
+      this.msgWarn('建设中')
     }
   },
   mounted() {
@@ -181,4 +217,21 @@ img {
   display: none;
 }
 
+::v-deep .pay-dialog{
+  height: 70px;
+  form[name="punchout_form"]{
+    input[type="submit"]{
+      background: #ff9308;
+      width: 100px;
+      font-size: 16px;
+      height: 40px;
+      color: #000;
+      margin: 0 auto;
+      border: 1px solid #ff9308;
+      border-radius: 4px;
+      display: block !important;
+    }
+  }
+
+}
 </style>

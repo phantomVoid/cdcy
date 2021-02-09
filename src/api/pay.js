@@ -7,3 +7,11 @@ export function pay(data) {
     data: data
   })
 }
+
+export function newTranZfb(data){
+  return request({
+    url: '/system/tran/newTranZfb',
+    method: 'post',
+    params: data
+  })
+}
