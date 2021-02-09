@@ -116,7 +116,7 @@ export default {
       })
     },
     payWx(){
-      this.msgWarn('建设中')
+      this.msgWarn('微信支付正在建设中')
     }
   },
   mounted() {
