@@ -1,125 +1,31 @@
 <template>
-  <div class="box">
-    <el-form :model="queryParams" ref="queryForm" :inline="true" label-width="68px">
-      <el-form-item label="时间" prop="time">
-        <el-date-picker
-          v-model="queryParams.time"
-          type="datetimerange"
-          align="right"
-          unlink-panels
-          range-separator="至"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-          value-format="yyyy-MM-dd HH:mm:ss"
-          :picker-options="pickerOptions"
-        >
-        </el-date-picker>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
-      </el-form-item>
-    </el-form>
-
-    <el-table
-      v-loading="loading"
-      :data="recordList"
-      row-key="id"
-      border
-    >
-      <el-table-column label="序号" align="center" type="index" width="50"/>
-      <el-table-column label="比赛编号" align="center" prop="id" width="120"/>
-      <el-table-column label="时间" align="center" prop="startTime" width="150"/>
-      <el-table-column label="房间号" align="center" prop="roomNum"/>
-      <el-table-column label="游戏ID" align="center" prop="gameId">
-        <template slot-scope="scope">
-          <span>{{ userInfo.gameId }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="比赛状态" align="center" prop="status">
-        <template slot-scope="scope">
-          <span :style="{color: getStatusColor(scope.row.status)}">{{ gameStatusFormat(scope.row) }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
-        <template slot-scope="scope">
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-document"
-            @click="handleDetail(scope.row)"
-          >查看详情
-          </el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-    <pagination
-      :total="total"
-      :page.sync="queryParams.pageNum"
-      :limit.sync="queryParams.pageSize"
-      @pagination="getList"
-    />
-
-    <el-dialog title="查看比赛详情" :visible.sync="open" width="700px" center append-to-body>
-      <el-row :gutter="20">
-        <el-col :span="10">
-          <div class="detail-item">
-            比赛编号：{{ recordDetail.id }}
+  <div class="container">
+    <div class="index-box">
+      <div class="last-news">
+        <div class="news-box">
+          <div class="news-all">
+            <el-tabs v-model="newsTabName">
+              <el-tab-pane label="参赛记录" name="complex">
+                <span slot="label" style="font-size: 16px">参赛记录</span>
+                <div class="news-box">
+                  <div class="news-items">
+                    <div class="news-item" v-for="(row ,index) in recordList" :key="index" >
+                      <p>
+                        <span class="news-type">{{ row.id }}</span>
+<!--                        <span class="news-time">+ {{ row.amount }}</span>-->
+                        <br/><span class="news-title">游戏ID: {{ userInfo.gameId }}</span>
+                        <br/><span class="news-title">比赛时间: {{ row.startTime }}</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </el-tab-pane>
+            </el-tabs>
+            <div class="more-news" @click="backToUserCenter">返回</div>
           </div>
-        </el-col>
-        <el-col :span="6">
-          <div class="detail-item">
-            比赛状态：<span :style="'color:'+getStatusColor(recordDetail.status)">{{ gameStatusFormat(recordDetail) }}</span>
-          </div>
-        </el-col>
-        <el-col :span="8">
-          <div class="detail-item">
-            时间：{{ recordDetail.startTime }}
-          </div>
-        </el-col>
-      </el-row>
-
-      <el-row :gutter="20">
-        <el-col :span="10">
-          <div class="detail-item">
-            房间号：{{ recordDetail.roomNum }}
-          </div>
-        </el-col>
-        <el-col :span="6">
-          <div class="detail-item">
-            房间密码：{{ recordDetail.password }}
-          </div>
-        </el-col>
-        <el-col :span="8">
-          <div class="detail-item">
-            游戏id：{{ userInfo.gameId }}
-          </div>
-        </el-col>
-      </el-row>
-      <el-row :gutter="20">
-        <el-col :span="24">
-          <div class="detail-item">
-            比赛结束时间：{{ recordDetail.endTime }}
-          </div>
-        </el-col>
-      </el-row>
-
-      <el-divider></el-divider>
-      <el-row :gutter="20">
-        <el-col :span="10">
-          <div class="detail-item">
-            <!--            比赛区服：{{ recordDetail.server ==='qq'?'QQ':'微信' }}-->
-            比赛区服：{{ gameServerFormat(recordDetail) }}
-          </div>
-        </el-col>
-        <el-col :span="8">
-          <div class="detail-item">
-            比赛模式：{{ gameTypeFormat(recordDetail) }}
-          </div>
-        </el-col>
-      </el-row>
-      <el-button type="primary" class="close-btn" @click="open=false">关 闭</el-button>
-    </el-dialog>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -132,7 +38,6 @@ export default {
   components: {},
   data() {
     return {
-      open: false,
       loading: false,
       total: 0,
       queryParams: {
@@ -168,6 +73,7 @@ export default {
           }
         }]
       },
+      newsTabName: "complex",
       userInfo: {},
       gameStatusOptions: [],
       gameTypeOptions: [],
@@ -232,12 +138,14 @@ export default {
         isAsc: 'desc'
       }
       getRecordList(params).then(res => {
+        console.log(res);
         this.recordList = res.rows
         this.total = res.total
         this.loading = false
       }).catch(err => {
         this.loading = false
       })
+
     },
     getStatusColor(val) {
       if (val === 0) {
@@ -251,75 +159,134 @@ export default {
       } else {
         return '#d1d1d1'
       }
+    },
+    backToUserCenter() {
+      this.$router.push("/user").catch(e => {
+      });
+    }
+  },
+}
+</script>
+
+<style lang="scss" scoped>
+
+/* 手机屏幕的字体大小 */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 0px;
+    background-color: #fff;
+    position: relative;
+    //min-width: 1366px;
+    width: 100%;
+    height: auto;
+
+    .index-box {
+      background-color: #1a1a1a;
+      background-size: 100% 100%;
+    }
+  }
+
+  ::v-deep .last-news {
+    height: auto;
+
+    .news-title {
+      text-align: center;
+      padding: 0 0;
+    }
+
+    .news-box {
+      .el-tabs__item.is-top {
+        color: #fff !important;
+      }
+
+      .el-tabs__item.is-top.is-active {
+        color: #ff9308 !important;
+      }
+
+      .el-tabs__nav-wrap::after {
+        display: none !important;
+      }
+
+      .el-tabs__active-bar.is-top {
+        background-color: #ff9308 !important;
+      }
+
+
+      .news-all {
+        display: inline-block;
+        width: 100%;
+        background-color: #333333;
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+        height: 100%;
+        padding-bottom: 20px;
+        position: relative;
+        margin-bottom: 0.5rem;
+
+        .el-tabs__header {
+          margin: 0 !important;
+        }
+
+        .el-tabs__nav.is-top {
+          margin-left: 25px;
+        }
+
+        .news-box {
+          .news-items {
+            padding: 15px 25px;
+            margin: 5px 0px;
+            .news-item {
+              border-bottom: 1px solid #424242;
+              height: 80px;
+              margin-top: 10px;
+              padding-top: 0px;
+              line-height: 20px;
+              cursor: pointer;
+
+              .news-type {
+                color: #ffffff;
+                padding-right: 5px;
+                font-size: 14px;
+              }
+
+              .news-title {
+                font-size: 12px;
+                color: #999999;
+              }
+
+              .news-time {
+                font-size: 12px;
+                color: #999999;
+                text-align: right;
+                float: right;
+              }
+
+              &:last-child {
+                border-bottom: none;
+              }
+            }
+          }
+
+        }
+
+        .more-news {
+          font-size: 14px;
+          color: #ffffff;
+          position: absolute;
+          right: 6%;
+          top: 10px;
+          cursor: pointer;
+        }
+      }
     }
   }
 }
-</script>
-<style lang="scss" scoped>
 
-.box {
-  padding-left: 10px;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  background-color: #1a1a1a;
-  ::v-deep .el-tabs__item{
-    height: 35px;
-    line-height: 35px;
-    font-size: 15px;
-    padding: 0 20px;
-  }
-
-  ::v-deep .el-form-item__label{
-    color: #fff;
-    font-weight: 500;
-  }
-}
-
-
-::v-deep .el-dialog__body {
-  padding: 5px 30px 20px 30px;
-  color: #606266;
-  font-size: 14px;
-  word-break: break-all;
-}
-
-.detail-item{
-  margin: 10px 0;
-}
-
-::v-deep .el-dialog {
-  background: none;
-}
-::v-deep .el-dialog__header {
-  background-color: #444444;
-  background: #444444;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  .el-dialog__title{
-    color: #fff;
-  }
-}
-::v-deep .el-dialog__body{
-  background-color: #333333;
-  background: #333333;
-  color: #fff;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
-
-::v-deep .el-divider {
-  background-color: #666666;
-}
-.el-divider.el-divider--horizontal {
-  margin: 10px 0;
-}
-
-.close-btn{
-  width: 50%;
-  height: 35px;
-  display: inline-block;
-  text-align: center;
-  margin: 45px 25% 20px 25%;
-  font-weight: 600;
+img {
+  image-rendering: -moz-crisp-edges; /* Firefox */
+  image-rendering: -o-crisp-edges; /* Opera */
+  image-rendering: -webkit-optimize-contrast; /*Webkit (non-standard naming) */
+  image-rendering: crisp-edges;
+  -ms-interpolation-mode: nearest-neighbor; /* IE (non-standard property) */
 }
 </style>
