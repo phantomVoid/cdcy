@@ -123,26 +123,6 @@
   </div>
 </template>
 
-<script>
-
-import {getPayDetail} from '@/api/user'
-
-export default {
-  name: 'Record',
-  components: {},
-  data() {
-    return {
-
-    }
-  },
-  created() {
-  },
-  methods: {
-
-  },
-}
-</script>
-
 <style lang="scss" scoped>
 
 /* 手机屏幕的字体大小 */
@@ -491,7 +471,7 @@ img {
 </style>
 
 <script scoped>
-import {getPayDetail, getRecordList} from '@/api/user'
+import {getRecordList} from '@/api/user'
 import {joinGame} from '@/api/game'
 
 export default {
@@ -586,9 +566,6 @@ export default {
   methods: {
     getList() {
       this.loading = true
-      this.getPayDetail();
-
-      this.loading = true
       this.getRecordList()
     },
     payTypeFormat(row, column) {
@@ -610,34 +587,6 @@ export default {
     },
     handleDetail() {
 
-    },
-    getPayDetail() {
-      console.log("this is getPayDetail function: >>> ");
-      let startTime = ''
-      let endTime = ''
-      try {
-        startTime = this.queryParams.time[0]
-        endTime = this.queryParams.time[1]
-      } catch (err) {
-      }
-      const params = {
-        pageNum: this.queryParams.pageNum,
-        pageSize: this.queryParams.pageSize,
-        userId: this.userInfo.id,
-        startTime: startTime,
-        endTime: endTime,
-        orderByColumn: 'log_time',
-        isAsc: 'desc'
-      }
-      getPayDetail(params).then(res => {
-        console.log(res);
-        this.recordList = res.rows;
-        this.total = res.total;
-        this.loading = false
-      }).catch(err => {
-        this.loading = false
-      });
-      console.log(this.recordList);
     },
     backToUserCenter() {
       this.$router.push("/user").catch(e => {
