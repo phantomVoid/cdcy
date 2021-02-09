@@ -7,8 +7,7 @@ import { getToken } from '@/utils/auth'
 
 NProgress.configure({ showSpinner: false })
 
-const whiteList = ['/index', '/login', '/auth-redirect', '/register', '/mobile/login', '/mobile/register','/mobile/index']
-const whiteList = ['/login', '/auth-redirect', '/index', '/register', '/forget']
+const whiteList = ['/index', '/login', '/auth-redirect', '/register','/forget', '/mobile/login', '/mobile/register','/mobile/index']
 
 router.beforeEach((to, from, next) => {
   console.log("\n\n\n this is permission.js beforeEach function: >>> ")
