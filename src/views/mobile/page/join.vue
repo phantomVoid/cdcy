@@ -73,7 +73,7 @@
       </div>
     </div>
 
-    <el-dialog title="查看比赛规则" :visible.sync="open" width="680px" append-to-body>
+    <el-dialog title="查看比赛规则" :visible.sync="open" width="90%" append-to-body>
     <div class="rule-text">
       和平精英<br>
       个人赛(1V1)：<br>
@@ -309,7 +309,7 @@ img {
   .zh {
     display: inline-block;
     color: #f9f9f9;
-    font-size: 26px;
+    font-size: 13px;
     font-weight: 800;
     margin-right: 15px;
   }
@@ -318,12 +318,12 @@ img {
     color: #666666;
     display: inline-block;
     font-weight: 600;
-    font-size: 15px;
+    font-size: 8px;
   }
 
   .rule{
     color: #fff;
-    font-size: 15px;
+    font-size: 8px;
     margin-left: 20px;
     cursor: pointer;
     text-decoration:underline;
@@ -331,7 +331,7 @@ img {
 }
 
 .select {
-  margin: 10px 20%;
+  margin: 10px 5%;
   background: url(../../../assets/images/join-page-bg.png) center center no-repeat;
   background-size: 100% 100%;
   height: 215px;
@@ -359,11 +359,16 @@ img {
       height: 30px;
       background-color: #ff9308;
       margin-bottom: 25px;
-      font-size: 18px;
+      font-size: 16px;
       border: 0px;
+    }
+    ::v-deep.el-radio{
+      margin-right: 20px;
     }
     ::v-deep .el-radio__label{
       color: #fff;
+      font-size: 10px !important;
+      padding-left: 5px !important;
     }
     ::v-deep .el-radio__input.is-checked .el-radio__inner {
       border-color: #ff9308;
@@ -400,14 +405,15 @@ img {
 }
 
 .remark{
-  padding: 0 20%;
+  padding: 0 5%;
   height: 40px;
   color: #fff;
+  font-size: 12px;
   letter-spacing:2px;
 }
 
 .record {
-  padding: 0 20%;
+  padding: 0 5%;
   margin-bottom: 5%;
 }
 
