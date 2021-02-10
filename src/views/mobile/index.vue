@@ -151,7 +151,7 @@
 
     <el-dialog :title="activityTitle" :visible.sync="open" width="90%" append-to-body center>
       <div class="rule-text">
-        {{activityContent}}
+        {{ activityContent }}
       </div>
     </el-dialog>
 
@@ -181,52 +181,52 @@ export default {
   data() {
     return {
       open: false,
-      openContract:false,
+      openContract: false,
       activityTitle: '',
       activityContent: '',
       newsTabName: 'complex',
       hotTabName: 'going',
       activityList1: [
-        { id: 1, url: require('@/assets/images/activity-1.png'), title: '杀一当百', time: '无次数限制' },
-        { id: 2, url: require('@/assets/images/activity-2.png'), title: '摧枯拉朽', time: '无次数限制' },
-        { id: 3, url: require('@/assets/images/activity-3.png'), title: '万人无敌', time: '无次数限制' },
-        { id: 4, url: require('@/assets/images/activity-4.png'), title: '借力回天', time: '无次数限制' },
-        { id: 5, url: require('@/assets/images/activity-4.png'), title: '众志成城', time: '无次数限制' },
-        { id: 6, url: require('@/assets/images/activity-3.png'), title: '最佳损友', time: '无次数限制' },
-        { id: 7, url: require('@/assets/images/activity-2.png'), title: '敬请期待', time: '敬请期待' },
-        { id: 8, url: require('@/assets/images/activity-1.png'), title: '敬请期待', time: '敬请期待' }
+        {id: 1, url: require('@/assets/images/activity-1.png'), title: '杀一当百', time: '无次数限制'},
+        {id: 2, url: require('@/assets/images/activity-2.png'), title: '摧枯拉朽', time: '无次数限制'},
+        {id: 3, url: require('@/assets/images/activity-3.png'), title: '万人无敌', time: '无次数限制'},
+        {id: 4, url: require('@/assets/images/activity-4.png'), title: '借力回天', time: '无次数限制'},
+        {id: 5, url: require('@/assets/images/activity-4.png'), title: '众志成城', time: '无次数限制'},
+        {id: 6, url: require('@/assets/images/activity-3.png'), title: '最佳损友', time: '无次数限制'},
+        {id: 7, url: require('@/assets/images/activity-2.png'), title: '敬请期待', time: '敬请期待'},
+        {id: 8, url: require('@/assets/images/activity-1.png'), title: '敬请期待', time: '敬请期待'}
       ],
       activityList2: [
-        { id: 1, url: require('@/assets/images/activity-3.png'), title: '合作助力', time: '火热进行中' },
-        { id: 2, url: require('@/assets/images/activity-2.png'), title: '积分兑换', time: '无次数限制' },
-        { id: 3, url: require('@/assets/images/activity-4.png'), title: '敬请期待', time: '敬请期待' },
-        { id: 5, url: require('@/assets/images/activity-4.png'), title: '敬请期待', time: '敬请期待' },
-        { id: 6, url: require('@/assets/images/activity-2.png'), title: '敬请期待', time: '敬请期待' },
-        { id: 7, url: require('@/assets/images/activity-2.png'), title: '敬请期待', time: '敬请期待' },
-        { id: 8, url: require('@/assets/images/activity-4.png'), title: '敬请期待', time: '敬请期待' }
+        {id: 1, url: require('@/assets/images/activity-3.png'), title: '合作助力', time: '火热进行中'},
+        {id: 2, url: require('@/assets/images/activity-2.png'), title: '积分兑换', time: '无次数限制'},
+        {id: 3, url: require('@/assets/images/activity-4.png'), title: '敬请期待', time: '敬请期待'},
+        {id: 5, url: require('@/assets/images/activity-4.png'), title: '敬请期待', time: '敬请期待'},
+        {id: 6, url: require('@/assets/images/activity-2.png'), title: '敬请期待', time: '敬请期待'},
+        {id: 7, url: require('@/assets/images/activity-2.png'), title: '敬请期待', time: '敬请期待'},
+        {id: 8, url: require('@/assets/images/activity-4.png'), title: '敬请期待', time: '敬请期待'}
       ],
       activityList3: [
-        { id: 1, url: require('@/assets/images/activity-1.png'), title: '敬请期待', time: '敬请期待' },
-        { id: 2, url: require('@/assets/images/activity-2.png'), title: '敬请期待', time: '敬请期待' },
-        { id: 3, url: require('@/assets/images/activity-4.png'), title: '敬请期待', time: '敬请期待' },
-        { id: 4, url: require('@/assets/images/activity-3.png'), title: '敬请期待', time: '敬请期待' },
-        { id: 5, url: require('@/assets/images/activity-2.png'), title: '敬请期待', time: '敬请期待' }
+        {id: 1, url: require('@/assets/images/activity-1.png'), title: '敬请期待', time: '敬请期待'},
+        {id: 2, url: require('@/assets/images/activity-2.png'), title: '敬请期待', time: '敬请期待'},
+        {id: 3, url: require('@/assets/images/activity-4.png'), title: '敬请期待', time: '敬请期待'},
+        {id: 4, url: require('@/assets/images/activity-3.png'), title: '敬请期待', time: '敬请期待'},
+        {id: 5, url: require('@/assets/images/activity-2.png'), title: '敬请期待', time: '敬请期待'}
 
       ],
       newsBannerTitle: '最新: 11.2版本更新公告: 破坏之王',
       complexTopNews: '11.2版本更新公告: 破坏之王',
       complexNewsList: [
-        { id: 1, type: '公告', title: '积分商城:正在上架中如需兑换联系客服', time: '' },
-        { id: 2, type: '公告', title: '微信充值窗口正在维护中请优先选择支付宝', time: '' },
-        { id: 3, type: '公告', title: '请在参赛前仔细阅读比赛规则后在进行参赛报名', time: '' },
-        { id: 4, type: '公告', title: '持大创盈商城app正在上架中敬请期待', time: '' }
+        {id: 1, type: '公告', title: '积分商城:正在上架中如需兑换联系客服', time: ''},
+        {id: 2, type: '公告', title: '微信充值窗口正在维护中请优先选择支付宝', time: ''},
+        {id: 3, type: '公告', title: '请在参赛前仔细阅读比赛规则后在进行参赛报名', time: ''},
+        {id: 4, type: '公告', title: '持大创盈商城app正在上架中敬请期待', time: ''}
       ],
       announTopNews: '2021公告: 新春快乐',
       announNewsList: [
-        { id: 1, type: '公告', title: '积分商城:正在上架中如需兑换联系客服', time: '' },
-        { id: 2, type: '公告', title: '微信充值窗口正在维护中请优先选择支付宝', time: '' },
-        { id: 3, type: '公告', title: '请在参赛前仔细阅读比赛规则后在进行参赛报名', time: '' },
-        { id: 4, type: '公告', title: '持大创盈商城app正在上架中敬请期待', time: '' }
+        {id: 1, type: '公告', title: '积分商城:正在上架中如需兑换联系客服', time: ''},
+        {id: 2, type: '公告', title: '微信充值窗口正在维护中请优先选择支付宝', time: ''},
+        {id: 3, type: '公告', title: '请在参赛前仔细阅读比赛规则后在进行参赛报名', time: ''},
+        {id: 4, type: '公告', title: '持大创盈商城app正在上架中敬请期待', time: ''}
       ]
     }
   },
@@ -243,9 +243,9 @@ export default {
     toAct(index, name) {
       // this.msgWarn('建设中111')
       this.activityTitle = name;
-      if(name === '合作助力'){
+      if (name === '合作助力') {
         this.openContract = true
-      }else{
+      } else {
         switch (name) {
           case '杀一当百' :
             this.activityContent = "玩家若在对局中只杀一人获得全局比赛前三名，即可凭借有效对局截图联系客服申请100额外积分奖励（无次数限制）"
@@ -283,13 +283,14 @@ export default {
     },
     toContact() {
       const chatInfo = sessionStorage.getItem('chatInfo')
-      if(!chatInfo){
+      if (!chatInfo) {
         this.msgWarn('请先登录系统')
-        this.$router.push({path:'/login'})
+        this.$router.push({path: '/login'})
         return
       }
       // window.open('/chatroom/', '_blank')
-      this.$router.push("/ws/chat").catch(e => {})
+      this.$router.push("/ws/chat").catch(e => {
+      })
     },
     toMsg() {
       this.msgWarn('建设中')
@@ -440,7 +441,15 @@ export default {
               border-bottom: 1px solid #424242;
               height: 36px;
               line-height: 36px;
-              font-size: 14px;
+              @media screen and (max-width: 320px) {
+                font-size: 8px;
+              }
+              @media screen and (min-width: 320px) and (max-width: 390px) {
+                font-size: 10px;
+              }
+              @media screen and (min-width: 390px) {
+                font-size: 14px;
+              }
               cursor: pointer;
 
               .news-type {
@@ -467,7 +476,7 @@ export default {
         }
 
         .more-news {
-          font-size: 14px;
+          font-size: 12px;
           color: #999999;
           position: absolute;
           right: 6%;
@@ -588,7 +597,7 @@ export default {
               border-bottom: 1px solid #424242;
               height: 36px;
               line-height: 36px;
-              font-size: 14px;
+              font-size: 12px;
               cursor: pointer;
 
               .news-type {
@@ -615,7 +624,7 @@ export default {
         }
 
         .more-news {
-          font-size: 14px;
+          font-size: 12px;
           color: #999999;
           position: absolute;
           right: 6%;
