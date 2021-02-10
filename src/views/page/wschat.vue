@@ -30,12 +30,16 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   data() {
     return {
       ws: null,
       count: 0,
       userId: this.$store.state.user.info.id,
+      userName: this.$store.state.user.info.username,
+      passWord: this.$store.state.user.info.password,
       list: [],
       contentText: ""
     };
@@ -104,15 +108,38 @@ export default {
       if (window.WebSocket) {
         // 192.168.0.115 是我本地IP地址 此处的 :8181 端口号 要与后端配置的一致
         let ws = new WebSocket("ws://8.136.110.249:3333");
+        // let ws = new WebSocket("ws://192.168.0.111:3333");
         _this.ws = ws;
         ws.onopen = function (e) {
           console.log("服务器连接成功");
-          let data = {
-            "userId": _this.userId,
-            "type": "REGISTER"
+          // let registerData = {
+          //   "userId": _this.userId,
+          //   "type": "REGISTER"
+          // };
+          // console.log(registerData)
+          // ws.send(JSON.stringify(registerData));
+
+          let token = {
+            username: _this.userName,
+            userId: _this.userId,
+            "type": "guess"
           };
-          console.log(data)
-          ws.send(JSON.stringify(data));
+
+          let loginData = {
+            username: _this.userName,
+            password: null,
+            token: token
+          }
+
+          axios({
+            method:'post',
+            url:'/chatroom/login'
+          }).then(function(res){
+            console.log(res.data.name);
+          });
+
+          console.log(loginData)
+          ws.send(JSON.stringify(loginData));
         };
         ws.onclose = function () {
           _this.list = [

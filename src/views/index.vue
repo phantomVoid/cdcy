@@ -220,10 +220,14 @@ export default {
       this.msgWarn('建设中')
     },
     toContact() {
-      let data = {
-        path: '/ws/chat'
+      const chatInfo = sessionStorage.getItem('chatInfo')
+      if(!chatInfo){
+        this.msgWarn('请先登录系统')
+        this.$router.push({path:'/login'})
+        return
       }
-      this.$router.push(data).catch(e => {})
+      // window.open('/chatroom/', '_blank')
+      this.$router.push("/ws/chat").catch(e => {})
     },
     toMsg() {
       this.msgWarn('建设中')

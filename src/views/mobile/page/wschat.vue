@@ -9,7 +9,7 @@
         :style="i.userId == userId?'flex-direction:row-reverse':''"
       >
         <div
-             :class="i.userId == userId?'my-head':'user-head'"
+          :class="i.userId == userId?'my-head':'user-head'"
         >
           <div class="head"/>
         </div>
@@ -30,21 +30,22 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   data() {
     return {
       ws: null,
       count: 0,
       userId: this.$store.state.user.info.id,
+      userName: this.$store.state.user.info.username,
+      passWord: this.$store.state.user.info.password,
       list: [],
       contentText: ""
     };
   },
   created() {
-    let data = {
-      "userId": this.userId,
-      "type": "REGISTER"
-    };
+
   },
   mounted() {
     this.initWebSocket();
@@ -104,16 +105,40 @@ export default {
       if (window.WebSocket) {
         // 192.168.0.115 是我本地IP地址 此处的 :8181 端口号 要与后端配置的一致
         let ws = new WebSocket("ws://8.136.110.249:3333");
+        // let ws = new WebSocket("ws://192.168.0.111:3333");
         _this.ws = ws;
         ws.onopen = function (e) {
-          console.log("服务器连接成功");
-          let data = {
-            "userId": _this.userId,
-            "type": "REGISTER"
+          // console.log("服务器连接成功");
+          // let registerData = {
+          //   "userId": _this.userId,
+          //   "type": "REGISTER"
+          // };
+          // console.log(registerData)
+          // ws.send(JSON.stringify(registerData));
+
+          let token = {
+            username: _this.userName,
+            userId: _this.userId,
+            "type": "guess"
           };
-          console.log(data)
-          ws.send(JSON.stringify(data));
+
+          let loginData = {
+            username: _this.userName,
+            password: null,
+            token: token
+          }
+
+          axios({
+            method:'post',
+            url:'/chatroom/login'
+          }).then(function(res){
+            console.log(res.data.name);
+          });
+
+          console.log(loginData)
+          ws.send(JSON.stringify(loginData));
         };
+
         ws.onclose = function () {
           _this.list = [
             ..._this.list,
@@ -133,18 +158,18 @@ export default {
         ws.onmessage = function (e) {
           //接收服务器返回的数据
           let resData = JSON.parse(e.data);
-          if(resData.status === -1){
+          if (resData.status === -1) {
             _this.list = [
               ..._this.list,
               {userId: resData.userId, content: "当前客服忙，请稍后再试。"}
             ];
-          }else{
-            if(resData.data.content){
+          } else {
+            if (resData.data.content) {
               _this.list = [
                 ..._this.list,
                 {userId: resData.userId, content: resData.data.content}
               ];
-            }else{
+            } else {
               _this.list = [
                 ..._this.list,
                 {userId: resData.userId, content: "您好，欢迎咨询客服中心。"}
@@ -209,11 +234,13 @@ export default {
         align-items: center;
         background: url("../../../assets/images/avatar_on.png");
         background-size: 40px 40px;
+
         .head {
           width: 1.2rem;
           height: 1.2rem;
         }
       }
+
       .my-head {
         min-width: 2.5rem;
         width: 20%;
@@ -226,6 +253,7 @@ export default {
         align-items: center;
         background: url("../../../assets/images/avatar_user_on.png");
         background-size: 40px 40px;
+
         .head {
           width: 1.2rem;
           height: 1.2rem;
@@ -318,6 +346,7 @@ export default {
       margin-left: 0.5rem;
       transition: 0.5s;
     }
+
     .btn-active {
       background: #409eff;
     }

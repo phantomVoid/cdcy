@@ -221,6 +221,13 @@ export default {
       this.msgWarn('建设中')
     },
     toContact() {
+      const chatInfo = sessionStorage.getItem('chatInfo')
+      if(!chatInfo){
+        this.msgWarn('请先登录系统')
+        this.$router.push({path:'/login'})
+        return
+      }
+      // window.open('/chatroom/', '_blank')
       this.$router.push("/ws/chat").catch(e => {})
     },
     toMsg() {
