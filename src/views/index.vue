@@ -81,7 +81,7 @@
               <span slot="label" class="label">正在进行</span>
               <div class="activity">
                 <div class="activity-item" v-for="(activity, index) in activityList1" :key="index">
-                  <div class="activity-img" @click="toAct">
+                  <div class="activity-img" @click="toAct(index,activity.title)">
                     <img :src="activity.url" :alt="activity.title">
                   </div>
                   <div class="activity-title">
@@ -97,7 +97,7 @@
               <span slot="label" class="label">商城特惠</span>
               <div class="activity">
                 <div class="activity-item" v-for="(activity, index) in activityList2" :key="index">
-                  <div class="activity-img" @click="toAct">
+                  <div class="activity-img" @click="toAct(index,activity.title)">
                     <img :src="activity.url" :alt="activity.title">
                   </div>
                   <div class="activity-title">
@@ -113,7 +113,7 @@
               <span slot="label" class="label">长期活动</span>
               <div class="activity">
                 <div class="activity-item" v-for="(activity, index) in activityList1" :key="index">
-                  <div class="activity-img" @click="toAct">
+                  <div class="activity-img" @click="toAct(index,activity.title)">
                     <img :src="activity.url" :alt="activity.title">
                   </div>
                   <div class="activity-title">
@@ -145,6 +145,27 @@
         </div>
       </div>
     </div>
+
+    <el-dialog :title="activityTitle" :visible.sync="open" width="50%" append-to-body center>
+      <div class="rule-text">
+        {{activityContent}}
+      </div>
+    </el-dialog>
+
+    <el-dialog title="合伙人合作协议" :visible.sync="openContract" width="50%" append-to-body center>
+      <div class="rule-text">
+        合伙人层级分为初级合伙人、高级合伙人、超级合伙人：<br>
+        初级合伙人：有效会员人数达到500<br>
+        高级合伙人：有效会员人数达到2000<br>
+        超级合伙人：有效会员人数达到5000<br>
+        （有效会员，注册、充值、参与比赛即为有效会员）<br>
+        合伙人奖金和返现佣金比例：<br>
+        初级合伙人：人数达到500人即可向我们的合伙人专员领取1000元奖金并享有线下会员充值累计满10000元的百分之2的佣金，奖金和返现佣金由CD平台进行发放。<br>
+        高级合伙人：人数达到2000人即可向我们的合伙人专员领取5000元奖金并享有线下会员充值累计满10000元的百分之4的佣金，奖金和返现佣金由CD平台进行发放。<br>
+        超级合伙人：会人数达到5000人即可向我们的合伙人专员领取12888元奖金并享有线下会员充值累计满10000元的百分之6的佣金，奖金和返现佣金由CD平台进行发放。<br>
+        （人数达到即可向我们的合伙人专员申请合伙人升级。合伙人等级晋升：初级晋升高级会员充值额度返现佣金自动转化为4%；高级晋升超级会员充值额度返现佣金自动转化为6%）
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -157,49 +178,53 @@ export default {
   components: {},
   data() {
     return {
+      open: false,
+      openContract:false,
+      activityTitle: '',
+      activityContent: '',
       newsTabName: 'complex',
       hotTabName: 'going',
       activityList1: [
-        { id: 1, url: require('@/assets/images/activity-1.png'), title: '2021新赛季 新征程', time: '6天后结束' },
-        { id: 2, url: require('@/assets/images/activity-2.png'), title: '新春周边限定', time: '1天后结束' },
-        { id: 3, url: require('@/assets/images/activity-3.png'), title: '光明&黑暗 骑士', time: '31天后结束' },
-        { id: 4, url: require('@/assets/images/activity-4.png'), title: '光明&黑暗 骑士', time: '31天后结束' },
-        { id: 5, url: require('@/assets/images/activity-4.png'), title: '光明&黑暗 骑士', time: '31天后结束' },
-        { id: 6, url: require('@/assets/images/activity-3.png'), title: '光明&黑暗 骑士', time: '31天后结束' },
-        { id: 7, url: require('@/assets/images/activity-2.png'), title: '光明&黑暗 骑士', time: '31天后结束' },
-        { id: 8, url: require('@/assets/images/activity-1.png'), title: '光明&黑暗 骑士', time: '31天后结束' }
+        { id: 1, url: require('@/assets/images/activity-1.png'), title: '杀一当百', time: '无次数限制' },
+        { id: 2, url: require('@/assets/images/activity-2.png'), title: '摧枯拉朽', time: '无次数限制' },
+        { id: 3, url: require('@/assets/images/activity-3.png'), title: '万人无敌', time: '无次数限制' },
+        { id: 4, url: require('@/assets/images/activity-4.png'), title: '借力回天', time: '无次数限制' },
+        { id: 5, url: require('@/assets/images/activity-4.png'), title: '众志成城', time: '无次数限制' },
+        { id: 6, url: require('@/assets/images/activity-3.png'), title: '最佳损友', time: '无次数限制' },
+        { id: 7, url: require('@/assets/images/activity-2.png'), title: '敬请期待', time: '敬请期待' },
+        { id: 8, url: require('@/assets/images/activity-1.png'), title: '敬请期待', time: '敬请期待' }
       ],
       activityList2: [
-        { id: 1, url: require('@/assets/images/activity-3.png'), title: '光明&黑暗 骑士', time: '31天后结束' },
-        { id: 2, url: require('@/assets/images/activity-2.png'), title: '2021新赛季 新征程', time: '6天后结束' },
-        { id: 3, url: require('@/assets/images/activity-4.png'), title: '新春周边限定', time: '16天后结束' },
-        { id: 5, url: require('@/assets/images/activity-4.png'), title: '新春周边限定', time: '15天后结束' },
-        { id: 6, url: require('@/assets/images/activity-2.png'), title: '2021新赛季 限定', time: '12天后结束' },
-        { id: 7, url: require('@/assets/images/activity-2.png'), title: '新春周边限定', time: '13天后结束' },
-        { id: 8, url: require('@/assets/images/activity-4.png'), title: '光明&黑暗 限定', time: '11天后结束' }
+        { id: 1, url: require('@/assets/images/activity-3.png'), title: '合作助力', time: '火热进行中' },
+        { id: 2, url: require('@/assets/images/activity-2.png'), title: '积分兑换', time: '无次数限制' },
+        { id: 3, url: require('@/assets/images/activity-4.png'), title: '敬请期待', time: '敬请期待' },
+        { id: 5, url: require('@/assets/images/activity-4.png'), title: '敬请期待', time: '敬请期待' },
+        { id: 6, url: require('@/assets/images/activity-2.png'), title: '敬请期待', time: '敬请期待' },
+        { id: 7, url: require('@/assets/images/activity-2.png'), title: '敬请期待', time: '敬请期待' },
+        { id: 8, url: require('@/assets/images/activity-4.png'), title: '敬请期待', time: '敬请期待' }
       ],
       activityList3: [
-        { id: 1, url: require('@/assets/images/activity-1.png'), title: '新春周边限定', time: '1天后结束' },
-        { id: 2, url: require('@/assets/images/activity-2.png'), title: '光明&黑暗 骑士', time: '31天后结束' },
-        { id: 3, url: require('@/assets/images/activity-4.png'), title: '2021新赛季 新征程', time: '6天后结束' },
-        { id: 4, url: require('@/assets/images/activity-3.png'), title: '2021新赛季 新征程', time: '6天后结束' },
-        { id: 5, url: require('@/assets/images/activity-2.png'), title: '2021新赛季 新征程', time: '6天后结束' }
+        { id: 1, url: require('@/assets/images/activity-1.png'), title: '敬请期待', time: '敬请期待' },
+        { id: 2, url: require('@/assets/images/activity-2.png'), title: '敬请期待', time: '敬请期待' },
+        { id: 3, url: require('@/assets/images/activity-4.png'), title: '敬请期待', time: '敬请期待' },
+        { id: 4, url: require('@/assets/images/activity-3.png'), title: '敬请期待', time: '敬请期待' },
+        { id: 5, url: require('@/assets/images/activity-2.png'), title: '敬请期待', time: '敬请期待' }
 
       ],
       newsBannerTitle: '最新: 11.2版本更新公告: 破坏之王',
       complexTopNews: '11.2版本更新公告: 破坏之王',
       complexNewsList: [
-        { id: 1, type: '公告', title: '命运之轮1123123', time: '1-30' },
-        { id: 2, type: '新闻', title: '命运之轮1123123', time: '1-30' },
-        { id: 3, type: '公告', title: '命运之轮1123123', time: '1-30' },
-        { id: 4, type: '新闻', title: '命运之轮1123123', time: '1-30' }
+        { id: 1, type: '公告', title: '积分商城:正在上架中如需兑换联系客服', time: '' },
+        { id: 2, type: '公告', title: '微信充值窗口正在维护中请优先选择支付宝', time: '' },
+        { id: 3, type: '公告', title: '请在参赛前仔细阅读比赛规则后在进行参赛报名', time: '' },
+        { id: 4, type: '公告', title: '持大创盈商城app正在上架中敬请期待', time: '' }
       ],
       announTopNews: '2021公告: 新春快乐',
       announNewsList: [
-        { id: 1, type: '公告', title: '新春快乐2333333333', time: '1-30' },
-        { id: 2, type: '公告', title: '新春快乐2333333333', time: '1-30' },
-        { id: 3, type: '公告', title: '新春快乐2333333333', time: '1-30' },
-        { id: 4, type: '公告', title: '新春快乐2333333333', time: '1-30' }
+        { id: 1, type: '公告', title: '积分商城:正在上架中如需兑换联系客服', time: '' },
+        { id: 2, type: '公告', title: '微信充值窗口正在维护中请优先选择支付宝', time: '' },
+        { id: 3, type: '公告', title: '请在参赛前仔细阅读比赛规则后在进行参赛报名', time: '' },
+        { id: 4, type: '公告', title: '持大创盈商城app正在上架中敬请期待', time: '' }
       ]
     }
   },
@@ -213,8 +238,43 @@ export default {
     readeMore() {
       this.msgWarn('建设中')
     },
-    toAct() {
-      this.msgWarn('建设中')
+    toAct(index, name) {
+      // this.msgWarn('建设中111')
+      this.activityTitle = name;
+      if(name === '合作助力'){
+        this.openContract = true
+      }else{
+        switch (name) {
+          case '杀一当百' :
+            this.activityContent = "玩家若在对局中只杀一人获得全局比赛前三名，即可凭借有效对局截图联系客服申请100额外积分奖励（无次数限制）"
+            break
+          case '摧枯拉朽' :
+            this.activityContent = "玩家若在任何对局中击杀超过15人，即可凭借有效对局截图向客服申请50额外积分奖励（无次数限制）"
+            break
+          case '万人无敌' :
+            this.activityContent = "玩家若在个人对局中击杀超过20人，即可凭借有效对局截图向客服申请200额外积分奖励（无次数限制）"
+            break
+          case '借力回天' :
+            this.activityContent = "玩家若在个人赛连续四局落地成盒（落地成盒是指在游戏开始的短时间内未淘汰敌人反之被对手淘汰的选手），未有有效击杀数，即可凭借有效截图向客服申请25额外积分鼓励（没有次数限制）"
+            break
+          case '众志成城' :
+            this.activityContent = "若在团队对局中连续五次获得前三名，即可凭借有效截图向客服申请500积分奖励（没有次数限制）"
+            break
+          case '最佳损友' :
+            this.activityContent = "若在团队对局中连续五次倒数前三名，可以凭借有效对局截图向客服申请50额外积分鼓励（没有次数限制）"
+            break
+          case '积分兑换' :
+            this.activityContent = "联系客服添加我们积分兑换专员企业微信咨询，即可积分兑换现金！"
+            break
+          case '敬请期待' :
+            this.activityContent = "更多活动正准备袭来，敬请期待"
+            break
+          case '' :
+            this.activityContent = ""
+            break
+        }
+        this.open = true;
+      }
     },
     toNews() {
       this.msgWarn('建设中')

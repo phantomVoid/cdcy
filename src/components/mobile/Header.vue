@@ -89,9 +89,9 @@ export default {
       isLogin: false,
       userInfo: {},
       imgList: [
-        {id: 1, url: require('@/assets/images/banner.jpg')},
+        {id: 1, url: require('@/assets/images/banner1.png')},
         {id: 2, url: require('@/assets/images/banner.jpg')},
-        {id: 3, url: require('@/assets/images/banner.jpg')},
+        {id: 3, url: require('@/assets/images/banner1.png')},
         {id: 4, url: require('@/assets/images/banner.jpg')}
       ]
     }

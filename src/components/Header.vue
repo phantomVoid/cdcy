@@ -88,10 +88,10 @@ export default {
       isLogin: false,
       userInfo: {},
       imgList: [
-        { id: 1, url: require('@/assets/images/banner.jpg') },
-        { id: 2, url: require('@/assets/images/banner.jpg') },
-        { id: 3, url: require('@/assets/images/banner.jpg') },
-        { id: 4, url: require('@/assets/images/banner.jpg') }
+        {id: 1, url: require('@/assets/images/banner1.png')},
+        {id: 2, url: require('@/assets/images/banner.jpg')},
+        {id: 3, url: require('@/assets/images/banner1.png')},
+        {id: 4, url: require('@/assets/images/banner.jpg')}
       ]
     }
   },
@@ -131,7 +131,7 @@ export default {
         return
       }
       this.navClick(3, '个人中心')
-      this.$router.replace({ path: '/user' })
+      this.$router.replace({path: '/user'})
     },
     async logout() {
       this.$confirm('确定退出账号吗？', '提示', {
@@ -146,19 +146,20 @@ export default {
       })
     },
     toLogin() {
-      this.$router.push({ path: '/login' })
+      this.$router.push({path: '/login'})
     }
   }
 }
 </script>
 <style scoped lang="scss">
-img{
+img {
   image-rendering: -moz-crisp-edges; /* Firefox */
   image-rendering: -o-crisp-edges; /* Opera */
   image-rendering: -webkit-optimize-contrast; /*Webkit (non-standard naming) */
   image-rendering: crisp-edges;
   -ms-interpolation-mode: nearest-neighbor; /* IE (non-standard property) */
 }
+
 .header {
   position: relative;
 }
@@ -277,10 +278,10 @@ img{
 }
 
 
-
-.other{
+.other {
   float: right;
   margin-right: 20%;
+
   .login-btn {
     display: inline-block;
     height: 65px;
@@ -293,14 +294,17 @@ img{
       cursor: pointer;
     }
   }
-  .info{
+
+  .info {
     display: inline-block;
     vertical-align: top;
     margin-top: 18px;
-    .el-dropdown-link{
+
+    .el-dropdown-link {
       font-size: 16px;
       padding: 0 5px;
-      .el-icon--right{
+
+      .el-icon--right {
         padding-left: 5px;
       }
     }
@@ -318,7 +322,8 @@ img{
   color: #fff;
   line-height: 60px;
   margin-top: 18px;
-  img{
+
+  img {
     height: 28px;
   }
 }
@@ -337,17 +342,18 @@ a {
 }
 
 ::v-deep .el-dropdown-menu__item:not(.is-disabled):hover, .el-dropdown-menu__item:focus {
-  background-color: rgba(255,147,8,0.1);
+  background-color: rgba(255, 147, 8, 0.1);
   color: #ff9308;
 }
+
 @media screen and (min-width: 1900px) {
-  .banner-image{
+  .banner-image {
     height: 860px !important;
   }
   .banner {
     height: 860px !important;
   }
-  ::v-deep .el-carousel__container{
+  ::v-deep .el-carousel__container {
     height: 860px !important;
   }
 }
