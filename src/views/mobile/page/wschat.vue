@@ -108,13 +108,13 @@ export default {
         // let ws = new WebSocket("ws://192.168.0.111:3333");
         _this.ws = ws;
         ws.onopen = function (e) {
-          // console.log("服务器连接成功");
-          // let registerData = {
-          //   "userId": _this.userId,
-          //   "type": "REGISTER"
-          // };
-          // console.log(registerData)
-          // ws.send(JSON.stringify(registerData));
+          console.log("服务器连接成功");
+          let registerData = {
+            "userId": _this.userId,
+            "type": "REGISTER"
+          };
+          console.log(registerData)
+          ws.send(JSON.stringify(registerData));
 
           let token = {
             username: _this.userName,
@@ -130,13 +130,14 @@ export default {
 
           axios({
             method:'post',
-            url:'/chatroom/login'
+            url: '/chatroom/login',
+            params:loginData
           }).then(function(res){
-            console.log(res.data.name);
+            console.log(res);
           });
 
           console.log(loginData)
-          ws.send(JSON.stringify(loginData));
+          // ws.send(JSON.stringify(loginData));
         };
 
         ws.onclose = function () {
