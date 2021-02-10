@@ -216,7 +216,7 @@ export default {
   .backIndex {
     float: right;
     text-align: right;
-    font-size: 8px;
+    //font-size: 12px;
   }
 
   header {
