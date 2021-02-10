@@ -14,7 +14,7 @@
                         <span class="news-type">{{ row.id }}</span>
                         <span class="news-time">+ {{ row.amount }}</span>
                         <br/><span class="news-time"> {{ tranStatusFormat(row) }}</span>
-                        <br/><span class="news-title">支付类型: {{ payTypeFormat(row) }}</span>
+                        <span class="news-title">支付类型: {{ payTypeFormat(row) }}</span>
                         <br/><span class="news-title">比赛时间: {{ row.logTime }}</span>
                       </p>
                     </div>
