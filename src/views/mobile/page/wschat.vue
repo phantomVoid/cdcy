@@ -1,6 +1,13 @@
 <template>
   <div class="chat-box">
-    <header>客服中心</header>
+    <header>
+      <table style="width: 100%">
+        <tr>
+          <td class="headerText"><span class="headerText">客服中心</span></td>
+          <td class="backIndex"><a @click="backIndex">返回首页</a></td>
+        </tr>
+      </table>
+    </header>
     <div class="msg-box" ref="msg-box">
       <div
         v-for="(i,index) in list"
@@ -51,6 +58,9 @@ export default {
     this.initWebSocket();
   },
   methods: {
+    backIndex(){
+      this.$router.replace("/").catch(e=>{})
+    },
     //根据userID生成一个随机头像
     getUserHead(id, type) {
       let ID = String(id);
@@ -193,6 +203,16 @@ export default {
   height: 100%;
   width: 100%;
   max-width: 700px;
+
+  .headerText{
+    float: center;
+    text-align: right;
+  }
+  .backIndex{
+    float: right;
+    text-align: right;
+    font-size: 8px;
+  }
 
   header {
     position: fixed;

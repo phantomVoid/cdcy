@@ -1,6 +1,14 @@
 <template>
   <div class="chat-box">
-    <header>客服中心</header>
+    <header>
+      <table style="width: 100%">
+        <tr>
+          <td class="headerText"><span class="headerText">客服中心</span></td>
+          <td class="backIndex"><a @click="backIndex">返回首页</a></td>
+        </tr>
+      </table>
+    </header>
+
     <div class="msg-box" ref="msg-box">
       <div
         v-for="(i,index) in list"
@@ -22,11 +30,13 @@
         </div>
       </div>
     </div>
+
     <div class="input-box">
       <input type="text" ref="sendMsg" v-model="contentText" @keyup.enter="sendText()"/>
       <div class="btn" :class="{['btn-active']:contentText}" @click="sendText()">发送</div>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -54,6 +64,9 @@ export default {
     this.initWebSocket();
   },
   methods: {
+    backIndex(){
+      this.$router.replace("/").catch(e=>{})
+    },
     //根据userID生成一个随机头像
     getUserHead(id, type) {
       let ID = String(id);
@@ -132,10 +145,10 @@ export default {
           }
 
           axios({
-            method:'post',
-            url:'/chatroom/login',
-            params:loginData
-          }).then(function(res){
+            method: 'post',
+            url: '/chatroom/login',
+            params: loginData
+          }).then(function (res) {
             console.log(res.data.name);
           });
 
@@ -161,18 +174,18 @@ export default {
         ws.onmessage = function (e) {
           //接收服务器返回的数据
           let resData = JSON.parse(e.data);
-          if(resData.status === -1){
+          if (resData.status === -1) {
             _this.list = [
               ..._this.list,
               {userId: resData.userId, content: "当前客服忙，请稍后再试。"}
             ];
-          }else{
-            if(resData.data.content){
+          } else {
+            if (resData.data.content) {
               _this.list = [
                 ..._this.list,
                 {userId: resData.userId, content: resData.data.content}
               ];
-            }else{
+            } else {
               _this.list = [
                 ..._this.list,
                 {userId: resData.userId, content: "您好，欢迎咨询客服中心。"}
@@ -194,6 +207,17 @@ export default {
   height: 100%;
   width: 100%;
   max-width: 700px;
+
+  .headerText {
+    float: center;
+    text-align: right;
+  }
+
+  .backIndex {
+    float: right;
+    text-align: right;
+    font-size: 8px;
+  }
 
   header {
     position: fixed;
@@ -237,11 +261,13 @@ export default {
         align-items: center;
         background: url("../../assets/images/avatar_on.png");
         background-size: 40px 40px;
+
         .head {
           width: 1.2rem;
           height: 1.2rem;
         }
       }
+
       .my-head {
         min-width: 2.5rem;
         width: 20%;
@@ -254,6 +280,7 @@ export default {
         align-items: center;
         background: url("../../assets/images/avatar_user_on.png");
         background-size: 40px 40px;
+
         .head {
           width: 1.2rem;
           height: 1.2rem;
@@ -347,6 +374,7 @@ export default {
       margin-left: 0.5rem;
       transition: 0.5s;
     }
+
     .btn-active {
       background: #409eff;
     }
