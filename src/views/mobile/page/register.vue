@@ -3,10 +3,10 @@
   <div class="login">
     <el-form ref="registerForm" :model="registerForm" :rules="loginRules" class="login-form" label-width="80px">
       <h3 class="title">账号注册</h3>
-<!--      <el-form-item prop="nickname" label="用户昵称">
-        <el-input v-model="registerForm.nickname" type="text" auto-complete="off" placeholder="用户昵称">
-        </el-input>
-      </el-form-item>-->
+      <!--      <el-form-item prop="nickname" label="用户昵称">
+              <el-input v-model="registerForm.nickname" type="text" auto-complete="off" placeholder="用户昵称">
+              </el-input>
+            </el-form-item>-->
       <el-form-item prop="username" label="账号">
         <el-input v-model="registerForm.username" type="text" auto-complete="off" placeholder="账号">
         </el-input>
@@ -47,7 +47,7 @@
         <el-input v-model="registerForm.code" type="text" auto-complete="off" placeholder="验证码" style="width: 62%"
         ></el-input>
         <el-button class="regCodeBtn" @click="getRegCode" :disabled="codeDisable">
-          {{codeLabel}}
+          {{ codeLabel }}
         </el-button>
       </el-form-item>
       <el-form-item>
@@ -72,7 +72,9 @@
           <el-checkbox v-model="agree">我已阅读并同意相关服务条款和隐私政策</el-checkbox>
           <span @click="open=true">查看条款</span>
         </div>
-        <div style="text-align:center;margin-top: 10px;margin-left:-40px;color: #fff">已有账号, <a href="/mobile/login" style="color: #ff9308">去登录</a></div>
+        <div style="text-align:center;margin-top: 10px;margin-left:-40px;color: #fff">已有账号, <a href="/mobile/login"
+                                                                                               style="color: #ff9308">去登录</a>
+        </div>
       </el-form-item>
 
     </el-form>
@@ -82,7 +84,8 @@
       <div class="text">
         <h3>服务条款</h3><br>
         特别提示<br>
-        本《用户使用协议》（以下简称“协议”）约定厦门持大创盈网络科技有限公司（以下简称“公司”）与用户（您）之间关于持大创盈电竞平台（以下简称“CD”）服务的权利义务。 公司特别提醒您在注册成为用户之前，请认真阅读本协议，确保您充分理解本协议中各条款。请您审慎阅读并选择接受或不接受本协议。除非您接受本协议所有条款，否则您无权注册、登录或使用本协议所涉服务。用户的注册、登录、使用等行为将视为对本协议的接受，并同意接受本协议各项条款的约束。<br>
+        本《用户使用协议》（以下简称“协议”）约定厦门持大创盈网络科技有限公司（以下简称“公司”）与用户（您）之间关于持大创盈电竞平台（以下简称“CD”）服务的权利义务。
+        公司特别提醒您在注册成为用户之前，请认真阅读本协议，确保您充分理解本协议中各条款。请您审慎阅读并选择接受或不接受本协议。除非您接受本协议所有条款，否则您无权注册、登录或使用本协议所涉服务。用户的注册、登录、使用等行为将视为对本协议的接受，并同意接受本协议各项条款的约束。<br>
         <br>
         本协议可由公司随时更新，更新后的协议条款一旦公布即代替原来的协议条款，不再另行通知。在公司修改协议条款后，如果用户不接受修改后的条款，请立即停止使用CD平台服务，用户继续使用CD平台服务将被视为接受修改后的协议。<br>
         一、账号注册<br>
@@ -214,9 +217,11 @@
         一. 我们如何收集和使用您的个人信息<br>
         我们会按照如下方式收集您在使用服务时主动提供的，以及通过自动化手段收集您在使用功能或接受服务过程中产生的信息；<br>
         1、注册、登录<br>
-        1.1 当您注册、登录CD及相关服务时，您可以通过手机号创建帐号，并且您可以完善相关的网路身份识别信息（头像、昵称），收集这些信息是为了帮助您完成注册。您还可以根据自身需求选择填写性别、生日、地区、星座、兴趣爱好及个人介绍来完善您的信息。<br>
+        1.1
+        当您注册、登录CD及相关服务时，您可以通过手机号创建帐号，并且您可以完善相关的网路身份识别信息（头像、昵称），收集这些信息是为了帮助您完成注册。您还可以根据自身需求选择填写性别、生日、地区、星座、兴趣爱好及个人介绍来完善您的信息。<br>
         1.2 您也可以使用第三方帐号登录并使用CD，您将授权我们获取您在第三方平台注册的公开信息（头像、昵称以及您授权的其他信息），用于与CD帐号绑定，使您可以直接登录并使用本产品和相关服务。<br>
-        1.3 基于我们与通信运营商的合作，当您使用CD“一键登录”功能时，经过您的明示同意，运营商会将您的手机号码发送给我们，便于我们为您提供快捷的登录服务。手机号码属于个人敏感信息，如果拒绝提供将无法使用“一键登录”方式注册登录CD，但不影响您通过其他方式注册登录，也不影响其他功能的正常使用。<br>
+        1.3
+        基于我们与通信运营商的合作，当您使用CD“一键登录”功能时，经过您的明示同意，运营商会将您的手机号码发送给我们，便于我们为您提供快捷的登录服务。手机号码属于个人敏感信息，如果拒绝提供将无法使用“一键登录”方式注册登录CD，但不影响您通过其他方式注册登录，也不影响其他功能的正常使用。<br>
         2、浏览查看<br>
         2.1 为保证推荐内容的质量并向您推荐可能感兴趣的大神及相关信息，CD可能会收集相关必要的日志信息。<br>
         2.2 上述日志信息包括：<br>
@@ -226,7 +231,8 @@
         2.3 GPS地理位置是个人敏感信息，若您拒绝提供，我们将不会根据GPS信息向您推荐信息，且不会影响CD其他功能的正常使用。<br>
         2.4 我们会基于IP地址对应的城市、推荐您所在地区的本地相关信息。<br>
         3、大神入驻<br>
-        3.1 您在申请大神入驻时，根据法律法规的要求，需要进行实名认证，以验证您的身份。在实名认证的过程中，我们和提供认证服务的第三方认证机构需要您提供真实姓名、身份证号码及清晰的身份证正反面照片。这些信息是个人敏感信息，您可以拒绝提供，且不会影响CD其他功能的正常使用。这些信息仅供实名认证及法律法规所规定的用途，未经您明示授权，不会用作其他目的。<br>
+        3.1
+        您在申请大神入驻时，根据法律法规的要求，需要进行实名认证，以验证您的身份。在实名认证的过程中，我们和提供认证服务的第三方认证机构需要您提供真实姓名、身份证号码及清晰的身份证正反面照片。这些信息是个人敏感信息，您可以拒绝提供，且不会影响CD其他功能的正常使用。这些信息仅供实名认证及法律法规所规定的用途，未经您明示授权，不会用作其他目的。<br>
         3.2 大神入驻可能需要上传您的语音介绍和视频介绍，我们会请求您授权相机、照片、麦克风权限。您如果拒绝授权提供，将无法使用此功能，但不影响您正常使用CD的其他功能。<br>
         4、互动交流<br>
         4.1 当您关注帐号、进行浏览、关注或分享时，我们会收集您关注的帐号和前述信息，并展示关注帐号发布内容。<br>
@@ -242,7 +248,8 @@
         8.1 安全保障功能<br>
         我们致力于为您提供安全、可信的产品与使用环境，提供优质而可靠的服务与信息是我们的核心目标。为实现安全保障功能所收集的信息是必要信息。<br>
         8.2 设备信息与日志信息<br>
-        8.2.1 为了保障软件与服务的安全运行，我们会收集您的硬件型号、操作系统版本号、国际移动设备识别码、唯一设备标识符、网络设备硬件地址、IP地址、WLAB接入点、蓝牙、基站、软件版本号、网络接入方式、类型、状态、网络质量数据、操作、使用、服务日志。<br>
+        8.2.1
+        为了保障软件与服务的安全运行，我们会收集您的硬件型号、操作系统版本号、国际移动设备识别码、唯一设备标识符、网络设备硬件地址、IP地址、WLAB接入点、蓝牙、基站、软件版本号、网络接入方式、类型、状态、网络质量数据、操作、使用、服务日志。<br>
         8.2.2 为了预防恶意程序及安全运营所必需，我们会收集安装的应用信息或正在运行的进程信息、应用程序的总体运行、使用情况与频率、应用崩溃情况、总体安装使用情况、性能数据、应用来源。<br>
         8.2.3 我们可能使用您的账户信息、设备信息、服务日志信息以及我们关联方、合作方在获得您授权或依法可以共享的信息，用于判断账户安全、进行身份验证、检测及防范安全事件。<br>
         9、收集、使用个人信息目的变更<br>
@@ -278,10 +285,13 @@
         1.1 共享原则<br>
         1.1.1 授权同意原则：未经您的同意，我们不会共享您的个人信息，除非共享的个人信息是去标识化处理后的信息，且共享第三方无法重新识别此类信息的自然人主题。如果第三方使用信息的目的超越原授权同意范围，他们需要重新征得您的同意。<br>
         1.1.2 合法正当与最小必要原则：共享的数据必须具有合法正当目的，且共享的数据以达成目的必要为限。<br>
-        1.1.3 安全审慎原则：我们将审慎评估第三方使用共享信息的目的，对这些合作方的安全保障能力进行综合评估，并要求其遵循合作法律协议。我们会对合作方获取信息的软件工具开发包（SDK）、应用程序接口（API）进行严格的安全检测，以保护数据安全。<br>
+        1.1.3
+        安全审慎原则：我们将审慎评估第三方使用共享信息的目的，对这些合作方的安全保障能力进行综合评估，并要求其遵循合作法律协议。我们会对合作方获取信息的软件工具开发包（SDK）、应用程序接口（API）进行严格的安全检测，以保护数据安全。<br>
         1.2 实现功能或服务的共享信息<br>
-        1.2.1 当您在使用CD中由我们的关联方、第三方提供的功能，或者当软件服务提供商、智能设备提供商、系统服务提供商与我们联合为您提供服务时我们会将实现业务所必需的信息与这些关联方、第三方共享，用于综合统计并通过算法做特征与偏好分析，形成间接人群画像，用以向您进行推荐、展示或推送您可能感兴趣的信息，或者推送更适合您的特定功能、服务或商业广告。<br>
-        1.2.2 支付功能：支付功能由与我们合作的第三方支付机构向您提供服务。第三方支付机构可能需要收集您的姓名、手机号及验证码、支付宝账号或者银行卡账号，上述信息是个人敏感信息，这些信息是支付功能所必需的信息，拒绝提供将导致您无法使用该功能，但不影响其他功能的正常使用。<br>
+        1.2.1
+        当您在使用CD中由我们的关联方、第三方提供的功能，或者当软件服务提供商、智能设备提供商、系统服务提供商与我们联合为您提供服务时我们会将实现业务所必需的信息与这些关联方、第三方共享，用于综合统计并通过算法做特征与偏好分析，形成间接人群画像，用以向您进行推荐、展示或推送您可能感兴趣的信息，或者推送更适合您的特定功能、服务或商业广告。<br>
+        1.2.2
+        支付功能：支付功能由与我们合作的第三方支付机构向您提供服务。第三方支付机构可能需要收集您的姓名、手机号及验证码、支付宝账号或者银行卡账号，上述信息是个人敏感信息，这些信息是支付功能所必需的信息，拒绝提供将导致您无法使用该功能，但不影响其他功能的正常使用。<br>
         1.2.3 订单功能：当您使用CD订单功能时，经过您的授权，我们可能会与下单的相关服务提供方共享您的订单信息以方便您统一查询订单信息。<br>
         1.2.4 为与您使用的终端机型适配消息推送功能，我们可能会通过SDK等技术与终端设备制造商（华为、小米、OPPO、VIVO等）共享手机型号、版本及相关设备信息。<br>
         1.3 实现安全与分析统计的共享信息<br>
@@ -289,7 +299,8 @@
         1.3.2 分析产品使用情况：为分析我们服务的使用情况，提升用户使用的体验，我们可能会与关联方或第三方共享产品使用情况（崩溃、闪退）的统计性数据，这些数据难以与其他信息结合识别您的个人身份。<br>
         2、转让<br>
         2.1 我们不会转让您的个人信息给任何其他第三方，除非征得您的明确同意。<br>
-        2.2 随着我们业务的持续发展，我们将有可能进行合并、收购、资产转让，您的个人信息有可能因此而被转移。在发生前述变更时，我们将按照法律法规及不低于本隐私政策所载明的安全标准要求继受方保护您的个人信息，否则我们将要求继受方重新征得您的授权同意。<br>
+        2.2
+        随着我们业务的持续发展，我们将有可能进行合并、收购、资产转让，您的个人信息有可能因此而被转移。在发生前述变更时，我们将按照法律法规及不低于本隐私政策所载明的安全标准要求继受方保护您的个人信息，否则我们将要求继受方重新征得您的授权同意。<br>
         3、公开披露<br>
         我们仅在下列情形下，公开披露您的个人隐私信息：<br>
         1.征得您明确的授权同意；<br>
@@ -362,7 +373,7 @@
 </template>
 
 <script>
-import { getRegCode, register } from '@/api/register'
+import {getRegCode, register} from '@/api/register'
 
 export default {
   name: 'Login',
@@ -394,30 +405,30 @@ export default {
       },
       loginRules: {
         nickname: [
-          { required: true, trigger: 'blur', message: '用户昵称不能为空' }
+          {required: true, trigger: 'blur', message: '用户昵称不能为空'}
         ],
         username: [
-          { required: true, trigger: 'blur', message: '用户名不能为空' }
+          {required: true, trigger: 'blur', message: '用户名不能为空'}
         ],
         password: [
-          { required: true, trigger: 'blur', message: '密码不能为空' },
-          { min: 8, message: '密码长度不能少于8个字符', trigger: 'blur' }
+          {required: true, trigger: 'blur', message: '密码不能为空'},
+          {min: 8, message: '密码长度不能少于8个字符', trigger: 'blur'}
         ],
         checkPass: [
-          { required: true, trigger: 'blur', message: '确认密码不能为空' },
-          { validator: validatePass2, trigger: 'blur' }
+          {required: true, trigger: 'blur', message: '确认密码不能为空'},
+          {validator: validatePass2, trigger: 'blur'}
         ],
         idcard: [
-          { required: true, trigger: 'blur', message: '身份证不能为空' }
+          {required: true, trigger: 'blur', message: '身份证不能为空'}
         ],
         name: [
-          { required: true, trigger: 'blur', message: '真实姓名不能为空' }
+          {required: true, trigger: 'blur', message: '真实姓名不能为空'}
         ],
         gameId: [
-          { required: true, trigger: 'blur', message: '游戏ID不能为空' }
+          {required: true, trigger: 'blur', message: '游戏ID不能为空'}
         ],
         phone: [
-          { required: true, trigger: 'blur', message: '手机号码不能为空' },
+          {required: true, trigger: 'blur', message: '手机号码不能为空'},
           {
             pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/,
             message: '请输入正确的手机号码',
@@ -425,7 +436,7 @@ export default {
           }
         ],
         code: [
-          { required: true, trigger: 'blur', message: '验证码不能为空' }
+          {required: true, trigger: 'blur', message: '验证码不能为空'}
         ]
 
       },
@@ -453,7 +464,7 @@ export default {
           delete form.checkPass
           register(form).then(() => {
             this.msgSuccess('注册成功')
-            this.$router.push({ path: '/login' }).catch(() => {
+            this.$router.push({path: '/login'}).catch(() => {
             })
           }).catch(() => {
             this.$set(this.registerForm, 'checkPass', '')
@@ -529,14 +540,23 @@ export default {
     height: 100%;
     overflow-x: auto;
     background: #ffffff url(../../../assets/mobile/images/login-bg.jpg) no-repeat;
-    background-size: 118% 100%;
+    background-size: 100% 100%;
   }
 
   .login-form {
     border-radius: 6px;
     background: rgba(45, 45, 44, 0.8);
     width: 100%;
-    padding: 10px 20px 5px 20px;
+    @media screen and (max-height:640px) {
+      padding: 65% 20px 5px 20px;
+    }
+    @media screen and (min-height:640px) and (max-height: 960px) {
+      padding: 20% 20px 5px 20px;
+    }
+    @media screen and (min-height:960px) {
+      padding: 10% 20px 5px 20px;
+    }
+
     border: 1px solid rgba(45, 45, 44, 0.5);
 
     .el-input {
@@ -546,9 +566,11 @@ export default {
         height: 38px;
       }
     }
+
     .el-form-item {
       margin-bottom: 18px;
     }
+
     .input-icon {
       height: 39px;
       width: 14px;
@@ -556,17 +578,18 @@ export default {
     }
   }
 
-  .el-button--medium{
+  .el-button--medium {
     padding: 10px 0px;
     font-size: 14px;
     border-radius: 4px;
   }
-  .regCodeBtn{
+  .regCodeBtn {
     float: right;
     margin-top: 0px;
     width: 80px;
   }
 }
+
 /* 笔记本电脑的字体大小 */
 @media screen and (min-width: 768px) and (max-width: 1024px) {
   .login {
@@ -593,9 +616,11 @@ export default {
         height: 38px;
       }
     }
+
     .el-form-item {
       margin-bottom: 18px;
     }
+
     .input-icon {
       height: 39px;
       width: 14px;
@@ -603,12 +628,13 @@ export default {
     }
   }
 
-  .regCodeBtn{
+  .regCodeBtn {
     float: right;
     margin-top: 0px;
     width: 100px;
   }
 }
+
 /* 台式电脑显示器屏幕字体大小 */
 @media screen and (min-width: 1024px) {
   .login {
@@ -635,9 +661,11 @@ export default {
         height: 38px;
       }
     }
+
     .el-form-item {
       margin-bottom: 18px;
     }
+
     .input-icon {
       height: 39px;
       width: 14px;
@@ -645,7 +673,7 @@ export default {
     }
   }
 
-  .regCodeBtn{
+  .regCodeBtn {
     float: right;
     margin-top: 0px;
     width: 100px;
@@ -703,9 +731,11 @@ export default {
   font-size: 14px;
   color: #b3b3b3;
 }
-::v-deep .el-form-item__label{
+
+::v-deep .el-form-item__label {
   color: #fff !important;
 }
+
 ::v-deep .el-form-item__error {
   color: #ff9308;
 }
@@ -732,11 +762,12 @@ export default {
   border-color: #fd9208;
 }
 
-.check{
+.check {
   font-size: 12px;
-  span{
+
+  span {
     color: #fd9208;
-    margin-left: 10px ;
+    margin-left: 10px;
     display: inline-block;
     text-decoration: underline;
     cursor: pointer;
